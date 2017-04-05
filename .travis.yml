@@ -1,0 +1,45 @@
+language: android
+jdk: oraclejdk8
+
+sudo: false
+
+env:
+  global:
+   - secure: "lMnt0yjgF8sW1SmUMHJUDTGA3KdzsrffsDlpMVn9RkNdeFIgHNxCNbRFUoAeGP7mbEPudofxiQeWnpey3WzZi/SNlfXaPKRjSHF7/tyFqTaNLQuLQc27j3P3xQvApWgmdPN9quJ/A7a1gomgWnBuMwa8KgXm9gjIrlws3S3NXSs="
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - android-25
+
+branches:
+  only:
+    - master
+    - mmathieum
+
+git:
+  submodules: false
+
+before_install:
+ - git submodule update --init --recursive commons-android
+ - git submodule update --init --recursive mtransit-for-android
+ - chmod +x gradlew
+
+script: ./gradlew -c settings.gradle.travis build
+
+after_success:
+ - codecov
+
+addons:
+  coverity_scan:
+    project:
+      name: "mtransitapps/mtransit-for-android-gradle"
+      description: "Build submitted via Travis CI"
+    notification_email: mtransit.apps+CI@gmail.com
+    build_command_prepend: "./gradlew -c settings.gradle.travis clean"
+    build_command: "./gradlew -c settings.gradle.travis build"
+    branch_pattern: mmathieum

@@ -1,0 +1,18 @@
+machine:
+    java:
+        version: oraclejdk8
+
+checkout:
+  post:
+    - git submodule update --init --recursive commons-android
+    - git submodule update --init --recursive mtransit-for-android
+    - chmod +x gradlew
+
+dependencies:
+    override:
+        - echo y | android update sdk --no-ui --all --filter "tools"
+        - echo y | android update sdk --no-ui --all --filter "platform-tools"
+        - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.2"
+        - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+        - echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
+        - echo y | android update sdk --no-ui --all --filter "android-25"
