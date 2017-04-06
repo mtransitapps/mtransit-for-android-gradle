@@ -2,7 +2,9 @@ mtransit-for-android-gradle
 ===========================
 MonTransit for Android Gradle project
 
-[![Build Status](https://travis-ci.org/mtransitapps/mtransit-for-android-gradle.svg)](https://travis-ci.org/mtransitapps/mtransit-for-android-gradle)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/3792/badge.svg)](https://scan.coverity.com/projects/3792)
-
-The root Gradle project containing the MonTransit Android app and the librarie(s) as sub-modules.
+### master
+[![CircleCI](https://circleci.com/gh/mtransitapps/gradle-project/tree/master.svg?style=svg)](https://circleci.com/gh/mtransitapps/gradle-project/tree/master)
+[![Travis CI](https://api.travis-ci.org/mtransitapps/gradle-project.svg?branch=master)](https://travis-ci.org/mtransitapps/gradle-project/)
+## mmathieum
+[![CircleCI](https://circleci.com/gh/mtransitapps/gradle-project/tree/mmathieum.svg?style=svg)](https://circleci.com/gh/mtransitapps/gradle-project/tree/mmathieum)
+[![Travis CI](https://api.travis-ci.org/mtransitapps/gradle-project.svg?branch=mmathieum)](https://travis-ci.org/mtransitapps/gradle-project/)
