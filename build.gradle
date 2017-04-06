@@ -1,3 +1,5 @@
+apply from: "$project.rootDir/commons-android/commons-android.gradle";
+
 buildscript {
     repositories {
         jcenter()
@@ -11,29 +13,5 @@ allprojects {
     repositories {
         jcenter()
     }
-}
-
-ext {
-    minSdkVersion = 14
-    targetSdkVersion = 22
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
-    supportLibraryVersion = "23.2.1"
-    supportLibs = [
-        appCompat : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-        design : "com.android.support:design:${supportLibraryVersion}",
-        supportV13 : "com.android.support:support-v13:${supportLibraryVersion}"
-    ]
-    googlePlayServicesVersion = "8.4.0"
-    gpsLibs = [
-        ads : "com.google.android.gms:play-services-ads:${googlePlayServicesVersion}",
-        analytics : "com.google.android.gms:play-services-analytics:${googlePlayServicesVersion}",
-        location : "com.google.android.gms:play-services-location:${googlePlayServicesVersion}",
-        maps : "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}"
-    ]
-    facebookSdkVersion = "4.9.0"
-    fbLibs = [
-        audienceNetwork : "com.facebook.android:audience-network-sdk:${facebookSdkVersion}"
-    ]
 }
 
