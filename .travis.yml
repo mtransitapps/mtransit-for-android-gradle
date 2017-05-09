@@ -25,4 +25,4 @@ before_install:
  - git submodule update --init --recursive mtransit-for-android
  - chmod +x gradlew
 
-script: ./gradlew -c settings.gradle.travis build
+script: ./gradlew build assemble
