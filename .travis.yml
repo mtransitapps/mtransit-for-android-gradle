@@ -8,6 +8,7 @@ cache:
   directories:
     - ${TRAVIS_BUILD_DIR}/gradle/caches/
     - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+    - '$HOME/.android/build-cache'
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
     - '$HOME/.sonar/cache'
@@ -45,10 +46,13 @@ before_install:
  - git submodule update --init --recursive mtransit-for-android
  - chmod +x gradlew
 
-script: ./gradlew build assemble
+script: ./gradlew build assemble sonarqube
 
 addons:
   sonarcloud:
     organization: "mtransitapps-github"
     token:
       secure: "z10HI/Yx2IEZsM6WlnFJcrYophRtAoTUY50L7h/itghgDmJHWpRT2gwY2kQNrzVUSVoXWpbJaLadxC/XkTbgWS+NU8wsxRjkVZydLUqg6MHmrH++Byj2QT4elPU6Muwx6C8GtNMrWjHLRdzZDASB1r6CcP+P03PHF5lOKUZ1SrjcoQRjKx3REGHH/A4ULKZAOs6rYECtVg/pwqgW2Bf7+VnkdT04SJDpBboufCIWRyMjqZhMYmi1ink4bqV87pOZQ6y5ipZY/iuAREIeVIn4EkoqfHjgVD+Z9Cgw4qgTrNM5UmRxWi0gd/AT6kbtpRkDiBaFdfHnIdI1+MXMBmEVC7I71pwikfRoCFGqszfWmrowO3iZKTkXS3DgfJ8/+hu+3fdhElOxFGLKJ4rjREQcl31G//cV+8WA/BeVeCTP3QE+UKsj1ApzMmj6augP5cVwI9+nhPa2kUTESRFe0/2vnNpnU0qqGFoLTt1rpojBfXX36iRu3Ihu03pl7MSl0Pi6Cogyhdxy/fgouT1LNYFCmoSbe0w8KohLT71iGFga8GCRmZVFdIIzpC/wZ6RjbAiEM9/euSoLd0AICPJCnDEBxVtut4f1bbJfKNNYLtvJRxSzjsCPAanq5YxUVhuMvkBEMo/tgoDl4/oDf8lRU03opP5z5xtia0OVhbMyhB2Td+A="
+    branches:
+      - master
+      - mmathieum
