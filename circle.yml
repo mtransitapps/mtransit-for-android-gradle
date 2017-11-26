@@ -11,8 +11,8 @@ checkout:
 test:
   post:
     - ./gradlew build assemble
-    - cp -r app/build/outputs/apk $CIRCLE_ARTIFACTS
-    - cp -r app/build/reports $CIRCLE_ARTIFACTS
+    - cp -r mtransit-for-android/build/outputs/apk $CIRCLE_ARTIFACTS
+    - cp -r mtransit-for-android/build/reports $CIRCLE_ARTIFACTS
 
 dependencies:
     override:
