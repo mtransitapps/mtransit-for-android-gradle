@@ -9,3 +9,6 @@ MonTransit for Android Gradle project
 ### mmathieum
 [![CircleCI](https://circleci.com/gh/mtransitapps/mtransit-for-android-gradle/tree/mmathieum.svg?style=svg)](https://circleci.com/gh/mtransitapps/mtransit-for-android-gradle/tree/mmathieum)
 [![Travis CI](https://api.travis-ci.org/mtransitapps/mtransit-for-android-gradle.svg?branch=mmathieum)](https://travis-ci.org/mtransitapps/mtransit-for-android-gradle/)
+
+## Code Quality
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=mtransit-for-android-gradle:mtransit-for-android)](https://sonarcloud.io/dashboard/index/mtransit-for-android-gradle:mtransit-for-android)
