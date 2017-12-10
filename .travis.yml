@@ -2,8 +2,7 @@ language: android
 jdk: oraclejdk8
 
 sudo: false
-install:
-- yes | sdkmanager --update
+install: true
 
 cache:
   directories:
@@ -48,6 +47,7 @@ before_install:
  - git submodule update --init --recursive commons-android
  - git submodule update --init --recursive mtransit-for-android
  - chmod +x gradlew
+ - echo "y" | sdkmanager --update
 
 script:
  - ./gradlew build assemble
