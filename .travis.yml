@@ -16,12 +16,12 @@ cache:
     - '.gradle'
 
 install
-  - sdkmanager --install "tools"
-  - sdkmanager --install "platform-tools"
-  - sdkmanager --install "build-tools;27.0.2"
-  - sdkmanager --install "extras;android;m2repository"
-  - sdkmanager --install "extras;google;google_play_services"
-  - sdkmanager --install "extras;google;m2repository"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "tools"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "platform-tools"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "build-tools;27.0.2"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;android;m2repository"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;google_play_services"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;m2repository"
 
 branches:
   only:
