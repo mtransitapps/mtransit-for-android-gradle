@@ -2,7 +2,14 @@ language: android
 jdk: oraclejdk8
 
 sudo: false
-install: true
+install
+  - echo y | android update sdk --no-ui --all --filter "tool" # required for sdkmanager
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "tools"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "platform-tools"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "build-tools;27.0.2"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;android;m2repository"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;google_play_services"
+  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;m2repository"
 
 cache:
   directories:
@@ -15,13 +22,6 @@ cache:
     - '$HOME/.gradle'
     - '.gradle'
 
-install
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "tools"
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "platform-tools"
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "build-tools;27.0.2"
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;android;m2repository"
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;google_play_services"
-  - $ANDROID_HOME/tools/bin/sdkmanager --install "extras;google;m2repository"
 
 branches:
   only:

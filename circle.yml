@@ -17,6 +17,7 @@ test:
 
 dependencies:
     override:
+        - echo y | android update sdk --no-ui --all --filter "tool" # required for sdkmanager
         - $ANDROID_HOME/tools/bin/sdkmanager --install "tools"
         - $ANDROID_HOME/tools/bin/sdkmanager --install "platform-tools"
         - $ANDROID_HOME/tools/bin/sdkmanager --install "build-tools;27.0.2"
