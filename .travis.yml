@@ -2,7 +2,8 @@ language: android
 jdk: oraclejdk8
 
 sudo: false
-install: echo y | sdkmanager --update
+install:
+- yes | sdkmanager --update
 
 cache:
   directories:
