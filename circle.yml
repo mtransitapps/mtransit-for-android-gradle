@@ -18,9 +18,9 @@ test:
 dependencies:
     override:
         - echo y | android update sdk --no-ui --all --filter "tool" # required for sdkmanager
-        - $ANDROID_HOME/tools/bin/sdkmanager "tools"
-        - $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
-        - $ANDROID_HOME/tools/bin/sdkmanager "build-tools;27.0.2"
-        - $ANDROID_HOME/tools/bin/sdkmanager "extras;android;m2repository"
-        - $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services"
-        - $ANDROID_HOME/tools/bin/sdkmanager "extras;google;m2repository"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "tools"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;27.0.2"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;android;m2repository"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services"
+        - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;m2repository"
