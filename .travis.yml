@@ -50,6 +50,6 @@ before_install:
  - echo "y" | sdkmanager --update
 
 script:
- - ./gradlew build assemble
- - ./gradlew :mtransit-for-android:sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
+ - ./gradlew build assemble --console=plain
+ - ./gradlew :mtransit-for-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
 
