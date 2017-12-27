@@ -10,10 +10,10 @@ checkout:
 
 test:
   post:
-    - ./gradlew build assemble
+    - ./gradlew build assemble --console=plain
     - cp -r mtransit-for-android/build/outputs/apk $CIRCLE_ARTIFACTS
     - cp -r mtransit-for-android/build/reports $CIRCLE_ARTIFACTS
-    - ./gradlew :mtransit-for-android:sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
+    - ./gradlew :mtransit-for-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
 
 dependencies:
     override:
