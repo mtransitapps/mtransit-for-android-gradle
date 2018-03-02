@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/mtransit
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - run:
+          name: Update SDK
+          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;27.0.3" "platform-tools" "platforms;android-27"
+      - checkout
+      - run:
+          name: Checkout commons-android submodules
+          command: git submodule update --init --recursive commons-android
+      - run:
+          name: Checkout mtransit-for-android submodules
+          command: git submodule update --init --recursive mtransit-for-android
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
+      - run:
+          name: Lint Tests
+          command: ./gradlew lint test --console=plain
+      - run:
+          name: SonarQube
+          command: ./gradlew :mtransit-for-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
+      - run:
+          name: Build & Assemble
+          command: ./gradlew build assemble --console=plain
+      - store_artifacts:
+          path: mtransit-for-android/build/reports
+          destination: reports
+      - store_artifacts:
+          path: mtransit-for-android/build/outputs/apk
+          destination: apks
+      - store_test_results:
+          path: mtransit-for-android/build/test-results
