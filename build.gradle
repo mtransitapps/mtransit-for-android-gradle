@@ -14,10 +14,10 @@ buildscript {
             //noinspection GradleDependency // TODO update to 3.1+ when CI can add real keys during build
             classpath 'com.google.gms:google-services:3.0.0'
         } else {
-            classpath 'com.google.gms:google-services:3.2.1'
+            classpath 'com.google.gms:google-services:4.0.1'
         }
         classpath 'com.google.firebase:firebase-plugins:1.1.5'
-        classpath 'io.fabric.tools:gradle:1.25.2'
+        classpath 'io.fabric.tools:gradle:1.25.4'
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
     }
 }
