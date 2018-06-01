@@ -44,5 +44,10 @@ jobs:
       - store_artifacts:
           path: mtransit-for-android/build/outputs/apk
           destination: apks
+      - store_artifacts:
+          path: commons-android/build/reports
+          destination: commons-android-reports
       - store_test_results:
           path: mtransit-for-android/build/test-results
+      - store_test_results:
+          path: commons-android/build/test-results

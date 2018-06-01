@@ -1,3 +1,5 @@
+# DEPRECATED
+# MIGRATED TO CIRCLE CI 2.0 in .circleci/config.yml
 machine:
     java:
         version: oraclejdk8
