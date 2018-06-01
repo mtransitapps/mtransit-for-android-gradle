@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
         def isCI = System.getenv("CI") != null
+        println "/build.gradle: isCI $isCI"
         if (isCI) {
             //noinspection GradleDependency // TODO update to 3.1+ when CI can add real keys during build
             classpath 'com.google.gms:google-services:3.0.0'
