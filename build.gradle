@@ -2,9 +2,9 @@ apply from: "$project.rootDir/commons-android/commons-android.gradle"
 
 buildscript {
     repositories {
+        google()
         mavenCentral()
         jcenter()
-        google()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
@@ -25,9 +25,9 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         mavenCentral()
         jcenter()
-        google()
     }
 }
 
