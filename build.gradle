@@ -4,11 +4,10 @@ buildscript {
     repositories {
         google()
         jcenter()
-        mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         def isCI = System.getenv("CI") != null
         println "/build.gradle: isCI $isCI"
         if (isCI) {
@@ -27,7 +26,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
 }
 
