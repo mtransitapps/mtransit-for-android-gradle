@@ -23,12 +23,18 @@ jobs:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
+          name: mtransit-for-android/keys_*.sh permissions
+          command: sudo chmod +x mtransit-for-android/keys_*.sh
+      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --console=plain
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
+      - run:
+          name: Setup Android App keys
+          command: mtransit-for-android/keys_setup.sh;
       - run:
           name: Lint Tests
           command: ./gradlew lint test --console=plain
@@ -38,6 +44,9 @@ jobs:
       - run:
           name: Build & Assemble
           command: ./gradlew build assemble --console=plain
+      - run:
+          name: Cleanup Android App keys
+          command: mtransit-for-android/keys_cleanup.sh;
       - store_artifacts:
           path: mtransit-for-android/build/reports
           destination: reports
