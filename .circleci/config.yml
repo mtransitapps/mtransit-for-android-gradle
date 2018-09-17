@@ -32,6 +32,9 @@ jobs:
           name: mtransit-for-android/build.sh permissions
           command: sudo chmod +x mtransit-for-android/build.sh
       - run:
+          name: mtransit-for-android/bump_version.sh permissions
+          command: sudo chmod +x mtransit-for-android/bump_version.sh
+      - run:
           name: mtransit-for-android/keys_*.sh permissions
           command: sudo chmod +x mtransit-for-android/keys_*.sh
       - run:
