@@ -23,6 +23,9 @@ jobs:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
+          name: build.sh permissions
+          command: sudo chmod +x build.sh
+      - run:
           name: mtransit-for-android/build.sh permissions
           command: sudo chmod +x mtransit-for-android/build.sh
       - run:
@@ -36,8 +39,8 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
       - run:
-          name: Build Android App
-          command: mtransit-for-android/build.sh
+          name: Build
+          command: ./build.sh
       - store_artifacts:
           path: mtransit-for-android/build/reports
           destination: reports
