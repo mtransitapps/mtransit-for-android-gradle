@@ -1,5 +1,5 @@
 #!/bin/bash
-source commons/commons.sh
+source commons/commons.sh;
 echo "================================================================================";
 echo "> RUN ALL...";
 echo "--------------------------------------------------------------------------------";
@@ -71,7 +71,7 @@ for d in ${PWD}/* ; do
 done
 
 echo "> BUILDING ANDROID APP FOR '$AGENCY_ID'...";
-cd app-android;
+cd mtransit-for-android;
 
 ./bump_version.sh
 checkResult $? $CONFIRM;
