@@ -8,14 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        def isCI = System.getenv("CI") != null
-        println "/build.gradle: isCI $isCI"
-        if (isCI) {
-            //noinspection GradleDependency // TODO update to 3.1+ when CI can add real keys during build
-            classpath 'com.google.gms:google-services:3.0.0'
-        } else {
-            classpath 'com.google.gms:google-services:4.0.1'
-        }
+        classpath 'com.google.gms:google-services:4.0.1'
         classpath 'com.google.firebase:firebase-plugins:1.1.5'
         classpath 'io.fabric.tools:gradle:1.25.4'
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
