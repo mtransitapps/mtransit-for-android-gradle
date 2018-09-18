@@ -44,12 +44,15 @@ git:
   submodules: false
 
 before_install:
+ - git submodule update --init --recursive commons
  - git submodule update --init --recursive commons-android
  - git submodule update --init --recursive app-android
  - chmod +x gradlew
+ - chmod +x build.sh
+ - chmod +x app-android/build.sh
+ - chmod +x app-android/keys_*.sh
  - echo "y" | sdkmanager --update
 
 script:
- - ./gradlew build assemble --console=plain
- - ./gradlew :app-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
+ - ./build.sh
 
