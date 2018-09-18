@@ -18,6 +18,19 @@ LENGTH=$(expr $CURRENT_DIRECTORY_LENGTH - $GRADLE_LENGTH);
 AGENCY_ID=${CURRENT_DIRECTORY:$POSITION:$LENGTH};
 
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD);
+if [ "$GIT_BRANCH" = "HEAD" ]; then
+	GIT_BRANCH="";
+fi
+if [[ -z "${GIT_BRANCH}" ]]; then
+	GIT_BRANCH=$TRAVIS_BRANCH;
+	if [ "$GIT_BRANCH" = "HEAD" ]; then
+		GIT_BRANCH="";
+	fi
+fi
+if [[ -z "${GIT_BRANCH}" ]]; then
+	echo "GIT_BRANCH not found!";
+	exit -1;
+fi
 echo "GIT_BRANCH: $GIT_BRANCH.";
 RESULT=-1;
 
