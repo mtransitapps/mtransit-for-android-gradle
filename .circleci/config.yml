@@ -18,10 +18,10 @@ jobs:
           name: Checkout commons-android submodules
           command: git submodule update --init --recursive commons-android
       - run:
-          name: Checkout mtransit-for-android submodules
-          command: git submodule update --init --recursive mtransit-for-android
+          name: Checkout app-android submodules
+          command: git submodule update --init --recursive app-android
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
@@ -29,34 +29,34 @@ jobs:
           name: build.sh permissions
           command: sudo chmod +x build.sh
       - run:
-          name: mtransit-for-android/build.sh permissions
-          command: sudo chmod +x mtransit-for-android/build.sh
+          name: app-android/build.sh permissions
+          command: sudo chmod +x app-android/build.sh
       - run:
-          name: mtransit-for-android/bump_version.sh permissions
-          command: sudo chmod +x mtransit-for-android/bump_version.sh
+          name: app-android/bump_version.sh permissions
+          command: sudo chmod +x app-android/bump_version.sh
       - run:
-          name: mtransit-for-android/keys_*.sh permissions
-          command: sudo chmod +x mtransit-for-android/keys_*.sh
+          name: app-android/keys_*.sh permissions
+          command: sudo chmod +x app-android/keys_*.sh
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --console=plain
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "mtransit-for-android/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
           name: Build
           command: ./build.sh
       - store_artifacts:
-          path: mtransit-for-android/build/reports
+          path: app-android/build/reports
           destination: reports
       - store_artifacts:
-          path: mtransit-for-android/build/outputs/apk
+          path: app-android/build/outputs/apk
           destination: apks
       - store_artifacts:
           path: commons-android/build/reports
           destination: commons-android-reports
       - store_test_results:
-          path: mtransit-for-android/build/test-results
+          path: app-android/build/test-results
       - store_test_results:
           path: commons-android/build/test-results

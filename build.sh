@@ -71,7 +71,7 @@ for d in ${PWD}/* ; do
 done
 
 echo "> BUILDING ANDROID APP FOR '$AGENCY_ID'...";
-cd mtransit-for-android;
+cd app-android;
 
 ./bump_version.sh
 checkResult $? $CONFIRM;

@@ -45,11 +45,11 @@ git:
 
 before_install:
  - git submodule update --init --recursive commons-android
- - git submodule update --init --recursive mtransit-for-android
+ - git submodule update --init --recursive app-android
  - chmod +x gradlew
  - echo "y" | sdkmanager --update
 
 script:
  - ./gradlew build assemble --console=plain
- - ./gradlew :mtransit-for-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
+ - ./gradlew :app-android:sonarqube --console=plain -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=mtransitapps-github -Dsonar.login=$MT_SONAR_LOGIN
 
