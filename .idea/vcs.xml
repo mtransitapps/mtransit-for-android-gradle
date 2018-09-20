@@ -2,7 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/commons-android" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/app-android" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/commons" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/commons-android" vcs="Git" />
   </component>
 </project>
