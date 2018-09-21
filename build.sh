@@ -25,7 +25,6 @@ if [[ -z "${GIT_BRANCH}" ]]; then
 	exit -1;
 fi
 echo "GIT_BRANCH: $GIT_BRANCH.";
-RESULT=-1;
 
 CONFIRM=false;
 
@@ -66,8 +65,10 @@ for d in ${PWD}/* ; do
 		else
 			echo "> GIT repo up-to-date in '$DIRECTORY' (local:$GIT_REV_PARSE_HEAD|origin/$GIT_BRANCH:$GIT_REV_PARSE_REMOTE_BRANCH).";
 		fi
+
 		git checkout ${GIT_BRANCH};
 		checkResult $? ${CONFIRM};
+
 		git pull;
 		checkResult $? ${CONFIRM};
 		echo "> GIT cleaning in '$DIRECTORY'... DONE";
@@ -75,6 +76,36 @@ for d in ${PWD}/* ; do
 		echo "--------------------------------------------------------------------------------";
 	fi
 done
+
+if [ -d "agency-parser" ]; then
+	echo "> CLEANING FOR '$AGENCY_ID'... (GRADLE BUILD)";
+	./gradlew :parser:clean :parser:build $GRADLE_ARGS;
+	checkResult $? $CONFIRM;
+
+	./gradlew :agency-parser:clean :agency-parser:build $GRADLE_ARGS;
+	checkResult $? $CONFIRM;
+	echo "> CLEANING FOR '$AGENCY_ID'... DONE";
+
+	echo "> PARSING DATA FOR '$AGENCY_ID'...";
+	cd agency-parser;
+
+	./download.sh;
+	checkResult $? $CONFIRM;
+
+	./parse_current.sh;
+	checkResult $? $CONFIRM;
+
+	./parse_next.sh;
+	checkResult $? $CONFIRM;
+
+	./list_change.sh;
+	checkResult $? $CONFIRM;
+
+	cd ..;
+	echo "> PARSING DATA FOR '$AGENCY_ID'... DONE";
+else
+	echo "> SKIP PARSING FOR '$AGENCY_ID'.";
+fi
 
 echo "> BUILDING ANDROID APP FOR '$AGENCY_ID'...";
 cd app-android;
@@ -95,4 +126,3 @@ DURATION_SEC=$(($AFTER_DATE_SEC-$BEFORE_DATE_SEC));
 echo "> $DURATION_SEC secs FROM $BEFORE_DATE TO $AFTER_DATE";
 echo "> RUN ALL... DONE";
 echo "================================================================================";
-
