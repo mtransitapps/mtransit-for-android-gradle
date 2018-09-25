@@ -18,7 +18,7 @@ jobs:
           name: Checkout submodules
           command: ./checkout_submodules.sh
       - restore_cache:
-          key: jars-{{ .Environment.MT_CACHE_KEY }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
           name: gradlew permissions
           command: sudo chmod +x ./gradlew
@@ -28,7 +28,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ .Environment.MT_CACHE_KEY }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
           name: build.sh permissions
           command: sudo chmod +x build.sh
