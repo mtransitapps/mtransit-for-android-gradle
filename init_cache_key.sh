@@ -1,7 +1,7 @@
 #!/bin/bash
 source commons/commons.sh;
 
-MT_CACHE_KEY="export MT_CACHE_KEY=";
+MT_CACHE_KEY="jars";
 MT_CACHE_KEY="$MT_CACHE_KEY-{{ checksum \"build.gradle\" }}";
 MT_CACHE_KEY="$MT_CACHE_KEY-{{ checksum \"commons-android/build.gradle\" }}";
 MT_CACHE_KEY="$MT_CACHE_KEY-{{ checksum \"commons-android/commons-android.gradle\" }}";
@@ -17,7 +17,7 @@ if [[ -z "${BASH_ENV}" ]]; then
     echo "BASH_ENV environment variable is NOT defined.";
 else
     echo "BASH_ENV: $BASH_ENV";
-    echo ${MT_CACHE_KEY} >> $BASH_ENV;
+    echo 'export MT_CACHE_KEY=$(echo $MT_CACHE_KEY)' >> $BASH_ENV
     echo "BASH_ENV: $BASH_ENV";
     source $BASH_ENV;
 fi
