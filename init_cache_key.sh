@@ -17,7 +17,7 @@ if [[ -z "${BASH_ENV}" ]]; then
     echo "BASH_ENV environment variable is NOT defined.";
 else
     echo "BASH_ENV: $BASH_ENV";
-    echo "export MT_CACHE_KEY=$MT_CACHE_KEY" >> $BASH_ENV;
+    echo "export MT_CACHE_KEY=${MT_CACHE_KEY}" >> $BASH_ENV;
     echo "BASH_ENV: $BASH_ENV";
     source $BASH_ENV;
 fi
