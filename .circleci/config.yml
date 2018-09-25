@@ -12,14 +12,11 @@ jobs:
           command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;28.0.3" "platform-tools" "platforms;android-28"
       - checkout
       - run:
-          name: Checkout commons submodule
-          command: git submodule update --init --recursive commons
+          name: checkout_submodules.sh permissions
+          command: sudo chmod +x checkout_submodules.sh
       - run:
-          name: Checkout commons-android submodules
-          command: git submodule update --init --recursive commons-android
-      - run:
-          name: Checkout app-android submodules
-          command: git submodule update --init --recursive app-android
+          name: Checkout submodules
+          command: ./checkout_submodules.sh
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
