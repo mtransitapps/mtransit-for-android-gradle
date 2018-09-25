@@ -79,27 +79,35 @@ done
 
 if [ -d "agency-parser" ]; then
 	echo "> CLEANING FOR '$AGENCY_ID'... (GRADLE BUILD)";
-	./gradlew :parser:clean :parser:build $GRADLE_ARGS;
-	checkResult $? $CONFIRM;
+	./gradlew :parser:clean :parser:build ${GRADLE_ARGS};
+	checkResult $? ${CONFIRM};
 
-	./gradlew :agency-parser:clean :agency-parser:build $GRADLE_ARGS;
-	checkResult $? $CONFIRM;
+	./gradlew :agency-parser:clean :agency-parser:build ${GRADLE_ARGS};
+	checkResult $? ${CONFIRM};
 	echo "> CLEANING FOR '$AGENCY_ID'... DONE";
 
 	echo "> PARSING DATA FOR '$AGENCY_ID'...";
 	cd agency-parser;
 
+    chmod +x download.sh;
+    checkResult $? ${CONFIRM};
 	./download.sh;
-	checkResult $? $CONFIRM;
+	checkResult $? ${CONFIRM};
 
+    chmod +x parse_current.sh;
+    checkResult $? ${CONFIRM};
 	./parse_current.sh;
-	checkResult $? $CONFIRM;
+	checkResult $? ${CONFIRM};
 
+    chmod +x parse_next.sh;
+    checkResult $? ${CONFIRM};
 	./parse_next.sh;
-	checkResult $? $CONFIRM;
+	checkResult $? ${CONFIRM};
 
+    chmod +x list_change.sh;
+    checkResult $? ${CONFIRM};
 	./list_change.sh;
-	checkResult $? $CONFIRM;
+	checkResult $? ${CONFIRM};
 
 	cd ..;
 	echo "> PARSING DATA FOR '$AGENCY_ID'... DONE";
@@ -110,9 +118,13 @@ fi
 echo "> BUILDING ANDROID APP FOR '$AGENCY_ID'...";
 cd app-android;
 
+chmod +x bump_version.sh;
+checkResult $? ${CONFIRM};
 ./bump_version.sh
 checkResult $? ${CONFIRM};
 
+chmod +x build.sh;
+checkResult $? ${CONFIRM};
 ./build.sh
 checkResult $? ${CONFIRM};
 

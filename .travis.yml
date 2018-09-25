@@ -46,9 +46,6 @@ before_install:
  - ./checkout_submodules.sh
  - chmod +x gradlew
  - chmod +x build.sh
- - chmod +x app-android/build.sh
- - chmod +x app-android/bump_version.sh
- - chmod +x app-android/keys_*.sh
  - echo "y" | sdkmanager --update
 
 script:

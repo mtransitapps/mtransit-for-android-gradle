@@ -26,15 +26,6 @@ jobs:
           name: build.sh permissions
           command: sudo chmod +x build.sh
       - run:
-          name: app-android/build.sh permissions
-          command: sudo chmod +x app-android/build.sh
-      - run:
-          name: app-android/bump_version.sh permissions
-          command: sudo chmod +x app-android/bump_version.sh
-      - run:
-          name: app-android/keys_*.sh permissions
-          command: sudo chmod +x app-android/keys_*.sh
-      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --console=plain
       - save_cache:
