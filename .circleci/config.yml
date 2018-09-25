@@ -24,7 +24,7 @@ jobs:
           name: Init cache key
           command: ./init_cache_key.sh
       - restore_cache:
-          key: {{ .Environment.MT_CACHE_KEY }}
+          key: jars-{{ .Environment.MT_CACHE_KEY }}
       - run:
           name: gradlew permissions
           command: sudo chmod +x ./gradlew
@@ -34,7 +34,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: {{ .Environment.MT_CACHE_KEY }}
+          key: jars-{{ .Environment.MT_CACHE_KEY }}
       - run:
           name: build.sh permissions
           command: sudo chmod +x build.sh
