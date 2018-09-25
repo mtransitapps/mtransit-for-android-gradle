@@ -3,13 +3,13 @@ jobs:
   build:
     working_directory: ~/mtransit
     docker:
-      - image: circleci/android:api-27-alpha
+      - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
       - run:
           name: Update SDK
-          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;27.0.3" "platform-tools" "platforms;android-27"
+          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;28.0.3" "platform-tools" "platforms;android-28"
       - checkout
       - run:
           name: Checkout commons submodule
@@ -23,7 +23,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
       - run:
-          name: Chmod permissions
+          name: gradlew permissions
           command: sudo chmod +x ./gradlew
       - run:
           name: build.sh permissions
