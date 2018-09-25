@@ -17,21 +17,27 @@ jobs:
       - run:
           name: Checkout submodules
           command: ./checkout_submodules.sh
+      - run:
+          name: init_cache_key.sh permissions
+          command: sudo chmod +x init_cache_key.sh
+      - run:
+          name: Init cache key
+          command: ./init_cache_key.sh
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
+          key: {{ .Environment.MT_CACHE_KEY }}
       - run:
           name: gradlew permissions
           command: sudo chmod +x ./gradlew
-      - run:
-          name: build.sh permissions
-          command: sudo chmod +x build.sh
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --console=plain
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}
+          key: {{ .Environment.MT_CACHE_KEY }}
+      - run:
+          name: build.sh permissions
+          command: sudo chmod +x build.sh
       - run:
           name: Build
           command: ./build.sh
