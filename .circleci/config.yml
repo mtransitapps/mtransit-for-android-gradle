@@ -17,12 +17,6 @@ jobs:
       - run:
           name: Checkout submodules
           command: ./checkout_submodules.sh
-      - run:
-          name: init_cache_key.sh permissions
-          command: sudo chmod +x init_cache_key.sh
-      - run:
-          name: Init cache key
-          command: ./init_cache_key.sh
       - restore_cache:
           key: jars-{{ .Environment.MT_CACHE_KEY }}
       - run:
