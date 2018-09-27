@@ -12,18 +12,21 @@ jobs:
           command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;28.0.3" "platform-tools" "platforms;android-28"
       - checkout
       - run:
-          name: checkout_submodules.sh permissions
-          command: sudo chmod +x checkout_submodules.sh
-      - run:
           name: Checkout submodules
-          command: ./checkout_submodules.sh
+          command: |
+          sudo chmod +x checkout_submodules.sh
+          ./checkout_submodules.sh
       - restore_cache:
           keys:
             - gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - run:
+          name: Generate gradle cache key
+          command: |
+          sudo chmod +x init_cache_key.sh
+          ./init_cache_key.sh
       - restore_cache:
           keys:
-            - gradle-cache-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}-{{ checksum "parser/build.gradle" }}-{{ checksum "agency-parser/build.gradle" }}
-            - gradle-cache-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}-
+            - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
       - run:
           name: gradlew permissions
           command: sudo chmod +x ./gradlew
@@ -39,7 +42,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle/caches/
-          key: gradle-cache-{{ checksum "build.gradle" }}-{{ checksum "commons-android/build.gradle" }}-{{ checksum "commons-android/commons-android.gradle" }}-{{ checksum "app-android/build.gradle" }}-{{ checksum "parser/build.gradle" }}-{{ checksum "agency-parser/build.gradle" }}
+          key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
       - save_cache:
           paths:
             - ~/.gradle/wrapper/
