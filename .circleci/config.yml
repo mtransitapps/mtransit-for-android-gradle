@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: circleci/android:api-28-alpha
     environment:
+      TERM: xterm-256color
       JVM_OPTS: -Xmx3200m
     steps:
       - run:
