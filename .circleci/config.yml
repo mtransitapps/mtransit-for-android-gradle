@@ -12,21 +12,21 @@ jobs:
           command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;28.0.3" "platform-tools" "platforms;android-28"
       - checkout
       - run:
+          name: checkout_submodules.sh permissions
+          command: sudo chmod +x checkout_submodules.sh
+      - run:
           name: Checkout submodules
-          command: |
-          sudo chmod +x checkout_submodules.sh
-          ./checkout_submodules.sh
+          command: ./checkout_submodules.sh
       - restore_cache:
-          keys:
-            - gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - run:
+          name: init_cache_key.sh permissions
+          command: sudo chmod +x init_cache_key.sh
       - run:
           name: Generate gradle cache key
-          command: |
-          sudo chmod +x init_cache_key.sh
-          ./init_cache_key.sh
+          command: ./init_cache_key.sh
       - restore_cache:
-          keys:
-            - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+          key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
       - run:
           name: gradlew permissions
           command: sudo chmod +x ./gradlew
