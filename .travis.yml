@@ -3,6 +3,7 @@ jdk: oraclejdk8
 
 sudo: false
 install: true
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -50,4 +51,3 @@ before_install:
 
 script:
  - ./build.sh
-
