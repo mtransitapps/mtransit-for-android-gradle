@@ -21,6 +21,12 @@ if [[ -z "${GIT_BRANCH}" ]]; then
 	fi
 fi
 if [[ -z "${GIT_BRANCH}" ]]; then
+	GIT_BRANCH=${CI_COMMIT_REF_NAME}; #GitLab
+	if [ "$GIT_BRANCH" = "HEAD" ]; then
+		GIT_BRANCH="";
+	fi
+fi
+if [[ -z "${GIT_BRANCH}" ]]; then
 	echo "GIT_BRANCH not found!";
 	exit -1;
 fi
