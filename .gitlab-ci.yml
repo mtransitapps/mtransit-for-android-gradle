@@ -51,7 +51,4 @@ all:
     - app-android/build/reports
     - app-android/build/outputs/apk
     - commons-android/build/reports
-  reports:
-    junit: app-android/build/test-results/TEST-*.xml
-    junit: commons-android/build/test-results/TEST-*.xml
 
