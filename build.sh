@@ -15,7 +15,13 @@ if [ "$GIT_BRANCH" = "HEAD" ]; then
 	GIT_BRANCH="";
 fi
 if [[ -z "${GIT_BRANCH}" ]]; then
-	GIT_BRANCH=${TRAVIS_BRANCH};
+	GIT_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH}; #TravicCI
+	if [ "$GIT_BRANCH" = "HEAD" ]; then
+		GIT_BRANCH="";
+	fi
+fi
+if [[ -z "${GIT_BRANCH}" ]]; then
+	GIT_BRANCH=${TRAVIS_BRANCH}; #TravicCI
 	if [ "$GIT_BRANCH" = "HEAD" ]; then
 		GIT_BRANCH="";
 	fi
