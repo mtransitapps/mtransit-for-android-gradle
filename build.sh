@@ -67,7 +67,7 @@ for d in ${PWD}/* ; do
 		continue;
 	fi
 	if [ -d "$d" ]; then
-		cd ${d};
+		cd ${d} || exit;
 		echo "> GIT cleaning in '$DIRECTORY'...";
 		GIT_REV_PARSE_HEAD=$(git rev-parse HEAD);
 		GIT_REV_PARSE_REMOTE_BRANCH=$(git rev-parse origin/${GIT_BRANCH});
@@ -99,7 +99,7 @@ if [ -d "agency-parser" ]; then
 	echo "> CLEANING FOR '$AGENCY_ID'... DONE";
 
 	echo "> PARSING DATA FOR '$AGENCY_ID'...";
-	cd agency-parser;
+	cd agency-parser || exit;
 
     chmod +x download.sh;
     checkResult $? ${CONFIRM};
@@ -128,7 +128,7 @@ else
 fi
 
 echo "> BUILDING ANDROID APP FOR '$AGENCY_ID'...";
-cd app-android;
+cd app-android || exit;
 
 chmod +x bump_version.sh;
 checkResult $? ${CONFIRM};
