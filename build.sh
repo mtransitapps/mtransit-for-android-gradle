@@ -34,7 +34,7 @@ if [[ -z "${GIT_BRANCH}" ]]; then
 fi
 if [[ -z "${GIT_BRANCH}" ]]; then
 	echo "GIT_BRANCH not found!";
-	exit -1;
+	exit 1;
 fi
 echo "GIT_BRANCH: $GIT_BRANCH.";
 
@@ -73,7 +73,7 @@ for d in ${PWD}/* ; do
 		GIT_REV_PARSE_REMOTE_BRANCH=$(git rev-parse origin/${GIT_BRANCH});
 		if [ "$GIT_REV_PARSE_HEAD" != "$GIT_REV_PARSE_REMOTE_BRANCH" ]; then
 			echo "> GIT repo outdated in '$DIRECTORY' (local:$GIT_REV_PARSE_HEAD|origin/$GIT_BRANCH:$GIT_REV_PARSE_REMOTE_BRANCH).";
-			exit -1;
+			exit 1;
 		else
 			echo "> GIT repo up-to-date in '$DIRECTORY' (local:$GIT_REV_PARSE_HEAD|origin/$GIT_BRANCH:$GIT_REV_PARSE_REMOTE_BRANCH).";
 		fi

@@ -16,7 +16,7 @@ printf '* "%s"\n' "${SUBMODULES[@]}";
 for SUBMODULE in "${SUBMODULES[@]}" ; do
 	if ! [ -d "$SUBMODULE" ]; then
 		echo "> Submodule does NOT exist '$SUBMODULE'!";
-		exit -1;
+		exit 1;
 	fi
 	git submodule update --init --recursive ${SUBMODULE};
 	RESULT=$?;
