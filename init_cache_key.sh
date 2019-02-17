@@ -3,7 +3,7 @@ source commons/commons.sh;
 
 RESULT_FILE="gradle_cache_key_checksum.txt";
 
-if [ -f ${RESULT_FILE} ]; then
+if [[ -f ${RESULT_FILE} ]]; then
   rm ${RESULT_FILE};
 fi
 touch ${RESULT_FILE};
@@ -19,7 +19,7 @@ echo `checksum_file commons-android/build.gradle` >> ${RESULT_FILE}
 echo `checksum_file commons-android/commons-android.gradle` >> ${RESULT_FILE}
 echo `checksum_file app-android/build.gradle` >> ${RESULT_FILE}
 
-if [ -d "parser" ]; then
+if [[ -d "parser" ]]; then
     echo `checksum_file parser/build.gradle` >> ${RESULT_FILE}
     echo `checksum_file agency-parser/build.gradle` >> ${RESULT_FILE}
 fi
