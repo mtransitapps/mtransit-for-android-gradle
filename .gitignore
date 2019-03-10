@@ -26,6 +26,7 @@ proguard/
 .idea/modules.xml
 .idea/workspace.xml
 .idea/libraries
+.idea/caches
 
 # gedit temporary files
 *~
