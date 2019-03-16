@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BashSupportProjectSettings">
+    <option name="globalVariables">
+      <set>
+        <option value="CI" />
+        <option value="CI_COMMIT_REF_NAME" />
+        <option value="MT_ENCRYPT_KEY" />
+        <option value="TRAVIS_BRANCH" />
+        <option value="TRAVIS_PULL_REQUEST_BRANCH" />
+      </set>
+    </option>
+  </component>
+</project>

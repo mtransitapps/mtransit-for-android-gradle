@@ -23,6 +23,7 @@ local.properties
 proguard/
 
 # IDEA/Android Studio project files, because the project can be imported from settings.gradle
+.idea/caches
 .idea/modules.xml
 .idea/workspace.xml
 .idea/libraries
