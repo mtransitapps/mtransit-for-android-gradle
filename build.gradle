@@ -9,8 +9,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'com.google.gms:google-services:4.2.0'
-        classpath 'com.google.firebase:firebase-plugins:1.1.5'
-        classpath 'io.fabric.tools:gradle:1.27.1' // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'com.google.firebase:firebase-plugins:1.2.0'
+        classpath 'io.fabric.tools:gradle:1.28.1' // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
     }
 }

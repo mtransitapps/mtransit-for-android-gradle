@@ -1,19 +1,34 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="AndroidLintRtlEnabled" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintRtlHardcoded" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintRtlSymmetry" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintUnknownNullness" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="BooleanMethodIsAlwaysInverted" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="CollectionAddAllCanBeReplacedWithConstructor" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantConditions" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
+      <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
+    </inspection_tool>
     <inspection_tool class="Convert2Diamond" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="EmptyStatementBody" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="m_reportEmptyBlocks" value="true" />
-      <option name="commentsAreContent" value="true" />
+    <inspection_tool class="Deprecation" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="IGNORE_INSIDE_DEPRECATED" value="true" />
     </inspection_tool>
-    <inspection_tool class="FieldCanBeLocal" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="NullableProblems" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="REPORT_NULLABLE_METHOD_OVERRIDES_NOTNULL" value="true" />
+      <option name="REPORT_NOT_ANNOTATED_METHOD_OVERRIDES_NOTNULL" value="true" />
+      <option name="REPORT_NOTNULL_PARAMETER_OVERRIDES_NULLABLE" value="true" />
+      <option name="REPORT_NOT_ANNOTATED_PARAMETER_OVERRIDES_NOTNULL" value="true" />
+      <option name="REPORT_NOT_ANNOTATED_GETTER" value="true" />
+      <option name="REPORT_NOT_ANNOTATED_SETTER_PARAMETER" value="true" />
+      <option name="REPORT_ANNOTATION_NOT_PROPAGATED_TO_OVERRIDERS" value="true" />
+      <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PointlessNullCheck" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantCast" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="UnusedAssignment" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <option name="REPORT_PREFIX_EXPRESSIONS" value="false" />
-      <option name="REPORT_POSTFIX_EXPRESSIONS" value="true" />
-      <option name="REPORT_REDUNDANT_INITIALIZER" value="true" />
-    </inspection_tool>
+    <inspection_tool class="SameParameterValue" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="StringBufferReplaceableByString" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="UnusedReturnValue" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="WeakerAccess" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="true" />

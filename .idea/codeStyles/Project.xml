@@ -1,22 +1,24 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <option name="FORMATTER_TAGS_ENABLED" value="true" />
     <AndroidXmlCodeStyleSettings>
       <option name="USE_CUSTOM_SETTINGS" value="true" />
     </AndroidXmlCodeStyleSettings>
     <JavaCodeStyleSettings>
-      <option name="BLANK_LINES_AROUND_INITIALIZER" value="0" />
       <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
       <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
       <option name="IMPORT_LAYOUT_TABLE">
         <value>
+          <package name="" withSubpackages="true" static="false" />
+          <emptyLine />
           <package name="java" withSubpackages="true" static="false" />
           <package name="javax" withSubpackages="true" static="false" />
           <emptyLine />
           <package name="org" withSubpackages="true" static="false" />
           <emptyLine />
-          <package name="android" withSubpackages="true" static="false" />
+          <package name="com" withSubpackages="true" static="false" />
           <emptyLine />
-          <package name="" withSubpackages="true" static="false" />
+          <package name="android" withSubpackages="true" static="false" />
           <emptyLine />
           <package name="" withSubpackages="true" static="true" />
         </value>
@@ -32,6 +34,7 @@
       <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
       <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
       <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
+      <option name="INDENT_CASE_FROM_SWITCH" value="false" />
       <indentOptions>
         <option name="USE_TAB_CHARACTER" value="true" />
       </indentOptions>
