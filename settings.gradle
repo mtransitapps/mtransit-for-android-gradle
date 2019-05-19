@@ -1,2 +1,3 @@
 include ':app-android', // main Android app
+        ':play-publisher', // Play publisher
         ':commons-android' // common code shared by all Android apps

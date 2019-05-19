@@ -1,6 +1,9 @@
 [submodule "commons"]
 	path = commons
 	url = git://github.com/mtransitapps/commons.git
+[submodule "play-publisher"]
+	path = play-publisher
+	url = git://github.com/mtransitapps/play-publisher.git
 [submodule "commons-android"]
 	path = commons-android
 	url = git://github.com/mtransitapps/commons-android.git
