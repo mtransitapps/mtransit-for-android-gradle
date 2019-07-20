@@ -32,6 +32,7 @@ android:
     - extra-android-m2repository
   licenses:
     - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
