@@ -47,6 +47,7 @@ before_install:
  - ./checkout_submodules.sh
  - chmod +x gradlew
  - chmod +x build.sh
+ - echo "y" | sdkmanager --list
  - echo "y" | sdkmanager --licenses
  - echo "y" | sdkmanager --update
 
