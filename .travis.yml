@@ -47,6 +47,7 @@ before_install:
  - ./checkout_submodules.sh
  - chmod +x gradlew
  - chmod +x build.sh
+ - touch ~/.android/repositories.cfg
  - yes | sdkmanager --update
 
 script:
