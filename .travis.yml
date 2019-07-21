@@ -1,5 +1,4 @@
 language: android
-dist: bionic # Ubuntu 18.04 LTS, Bionic
 jdk: oraclejdk8
 
 sudo: false
@@ -32,7 +31,6 @@ android:
     - extra-android-m2repository
   licenses:
     - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
@@ -49,6 +47,7 @@ before_install:
  - ./checkout_submodules.sh
  - chmod +x gradlew
  - chmod +x build.sh
+ - echo "y" | sdkmanager --licenses
  - echo "y" | sdkmanager --update
 
 script:
