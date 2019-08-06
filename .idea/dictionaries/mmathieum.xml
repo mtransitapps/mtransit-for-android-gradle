@@ -4,8 +4,11 @@
       <w>crashlytics</w>
       <w>firebase</w>
       <w>laurentides</w>
+      <w>mtransit</w>
+      <w>octranspo</w>
       <w>poi</w>
       <w>poim</w>
+      <w>transpo</w>
     </words>
   </dictionary>
 </component>

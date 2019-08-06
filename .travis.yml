@@ -24,15 +24,6 @@ android:
     - tools # to get the new `repository-11.xml`
     - platform-tools
     - tools # to install Android SDK tools
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-$ANDROID_API_LEVEL
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
 
 branches:
   only:
@@ -43,11 +34,15 @@ git:
   submodules: false
 
 before_install:
- - chmod +x checkout_submodules.sh
- - ./checkout_submodules.sh
- - chmod +x gradlew
- - chmod +x build.sh
- - echo "y" | sdkmanager --update
+  - chmod +x checkout_submodules.sh
+  - ./checkout_submodules.sh
+  - chmod +x gradlew
+  - chmod +x build.sh
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
+  - touch ~/.android/repositories.cfg
+  - sdkmanager tools
 
 script:
- - ./build.sh
+  - ./build.sh
