@@ -48,5 +48,6 @@ all:
     paths:
     - app-android/build/reports
     - app-android/build/outputs/apk
+    - app-android/build/outputs/bundle
     - commons-android/build/reports
 

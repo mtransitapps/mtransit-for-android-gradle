@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/mtransit
     docker:
-      - image: circleci/android:api-28-alpha
+      - image: circleci/android:api-28
     environment:
       JVM_OPTS: -Xmx3200m
       TERM: xterm-256color
@@ -56,6 +56,9 @@ jobs:
       - store_artifacts:
           path: app-android/build/outputs/apk
           destination: apks
+      - store_artifacts:
+          path: app-android/build/outputs/bundle
+          destination: bundles
       - store_artifacts:
           path: commons-android/build/reports
           destination: commons-android-reports
