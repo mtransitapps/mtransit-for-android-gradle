@@ -1,9 +1,0 @@
-include ':commons'; // common code shared by all
-
-if (file("agency-parser").exists()) {
-    include ':parser'; // common code shared by all parsers
-    include ':agency-parser'; // parser
-}
-
-include ':commons-android'; // common code shared by all Android apps
-include ':app-android'; // Android app
