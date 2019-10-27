@@ -36,6 +36,8 @@ git:
 before_install:
   - chmod +x checkout_submodules.sh
   - ./checkout_submodules.sh
+  - chmod +x commons/deploy_shared.sh
+  - ./commons/deploy_shared.sh
   - chmod +x gradlew
   - chmod +x build.sh
   - mkdir "$ANDROID_HOME/licenses" || true

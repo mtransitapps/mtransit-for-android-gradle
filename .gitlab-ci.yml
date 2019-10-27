@@ -41,6 +41,8 @@ all:
   script:
     - chmod +x checkout_submodules.sh
     - ./checkout_submodules.sh
+    - chmod +x commons/deploy_shared.sh
+    - ./commons/deploy_shared.sh
     - ./gradlew androidDependencies --console=plain
     - chmod +x build.sh
     - ./build.sh
