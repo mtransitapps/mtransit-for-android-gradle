@@ -1,6 +1,6 @@
 include ':commons'; // common code shared by all
 
-if (file("agency-parser).exists()) {
+if (file("agency-parser").exists()) {
     include ':parser'; // common code shared by all parsers
     include ':agency-parser'; // parser
 }
