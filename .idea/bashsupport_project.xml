@@ -6,6 +6,7 @@
         <option value="CI" />
         <option value="CI_COMMIT_REF_NAME" />
         <option value="MT_ENCRYPT_KEY" />
+        <option value="MT_SONAR_LOGIN" />
         <option value="TRAVIS_BRANCH" />
         <option value="TRAVIS_PULL_REQUEST_BRANCH" />
       </set>
