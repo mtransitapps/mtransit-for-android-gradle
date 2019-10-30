@@ -1,4 +1,5 @@
 #!/bin/bash
+# ORIGINAL FILE: https://github.com/mtransitapps/base-project-gradle
 #NO DEPENDENCY <= EXECUTED BEFORE GIT SUBMODULE
 
 declare -a SUBMODULES=(
