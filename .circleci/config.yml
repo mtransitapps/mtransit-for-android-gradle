@@ -20,8 +20,8 @@ jobs:
           name: Checkout submodules
           command: ./checkout_submodules.sh
       - run:
-          name: commons/init.sh permissions
-          command: sudo chmod +x commons/init.sh
+          name: commons/sync.sh permissions
+          command: sudo chmod +x commons/sync.sh
       - run:
           name: Deploy shared files
           command: ./commons/init.sh

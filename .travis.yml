@@ -37,8 +37,8 @@ git:
 before_install:
   - chmod +x checkout_submodules.sh
   - ./checkout_submodules.sh
-  - chmod +x commons/init.sh
-  - ./commons/init.sh
+  - chmod +x commons/sync.sh
+  - ./commons/sync.sh
   - chmod +x gradlew
   - chmod +x build.sh
   - mkdir "$ANDROID_HOME/licenses" || true
