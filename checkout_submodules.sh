@@ -1,5 +1,5 @@
 #!/bin/bash
-# ORIGINAL FILE: https://github.com/mtransitapps/base-project-gradle
+# ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 #NO DEPENDENCY <= EXECUTED BEFORE GIT SUBMODULE
 
 declare -a SUBMODULES=(

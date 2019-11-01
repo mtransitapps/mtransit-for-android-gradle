@@ -1,4 +1,4 @@
-# ORIGINAL FILE: https://github.com/mtransitapps/base-project-gradle
+# ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 version: 2
 jobs:
   build:
@@ -20,11 +20,11 @@ jobs:
           name: Checkout submodules
           command: ./checkout_submodules.sh
       - run:
-          name: commons/deploy_shared.sh permissions
-          command: sudo chmod +x commons/deploy_shared.sh
+          name: commons/init.sh permissions
+          command: sudo chmod +x commons/init.sh
       - run:
           name: Deploy shared files
-          command: ./commons/deploy_shared.sh
+          command: ./commons/init.sh
       - restore_cache:
           key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
