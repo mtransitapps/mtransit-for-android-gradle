@@ -24,7 +24,7 @@ jobs:
           command: sudo chmod +x commons/sync.sh
       - run:
           name: Deploy shared files
-          command: ./commons/init.sh
+          command: ./commons/sync.sh
       - restore_cache:
           key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
