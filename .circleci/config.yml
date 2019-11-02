@@ -23,7 +23,7 @@ jobs:
           name: commons/sync.sh permissions
           command: sudo chmod +x commons/sync.sh
       - run:
-          name: Deploy shared files
+          name: Sync files
           command: ./commons/sync.sh
       - restore_cache:
           key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
