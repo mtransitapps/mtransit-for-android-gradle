@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-android/app-android.iml" filepath="$PROJECT_DIR$/app-android/app-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons-android/commons-android.iml" filepath="$PROJECT_DIR$/commons-android/commons-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mtransit-for-android-gradle.iml" filepath="$PROJECT_DIR$/mtransit-for-android-gradle.iml" />
+    </modules>
+  </component>
+</project>

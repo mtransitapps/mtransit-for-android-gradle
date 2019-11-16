@@ -1,6 +1,6 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 language: android
-jdk: oraclejdk8
+jdk: openjdk8
 
 sudo: false
 install: true
