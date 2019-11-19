@@ -78,8 +78,6 @@ custom_local.properties
 # Shared files
 /build.gradle
 /build.sh
-/checkout_submodule.sh
-/.circleci/
 /gitall.sh
 /gradle.properties
 /gradle/
