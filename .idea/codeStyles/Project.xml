@@ -2,11 +2,9 @@
   <code_scheme name="Project" version="173">
     <option name="FORMATTER_TAGS_ENABLED" value="true" />
     <AndroidXmlCodeStyleSettings>
-      <option name="USE_CUSTOM_SETTINGS" value="true" />
+      <option name="ARRANGEMENT_SETTINGS_MIGRATED_TO_191" value="true" />
     </AndroidXmlCodeStyleSettings>
     <JavaCodeStyleSettings>
-      <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
-      <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
       <option name="IMPORT_LAYOUT_TABLE">
         <value>
           <package name="" withSubpackages="true" static="false" />
@@ -24,11 +22,6 @@
         </value>
       </option>
     </JavaCodeStyleSettings>
-    <XML>
-      <option name="XML_KEEP_LINE_BREAKS" value="false" />
-      <option name="XML_ALIGN_ATTRIBUTES" value="false" />
-      <option name="XML_SPACE_INSIDE_EMPTY_TAG" value="true" />
-    </XML>
     <codeStyleSettings language="JAVA">
       <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
       <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
