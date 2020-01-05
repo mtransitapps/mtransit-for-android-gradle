@@ -1,8 +1,11 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
+os: linux
+dist: xenial # Ubuntu 16.04
+# dist: bionic # Ubuntu 18.04 # not compatible with OpenJDK 8
 language: android
 jdk: openjdk8
+# jdk: openjdk11 # required for Ubuntu 18.04 Bionic
 
-sudo: false
 install: true
 
 before_cache:
