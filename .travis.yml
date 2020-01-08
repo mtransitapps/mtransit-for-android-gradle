@@ -22,6 +22,7 @@ env:
   global:
     - ANDROID_API_LEVEL=29
     - ANDROID_BUILD_TOOLS_VERSION=29.0.2
+    - TZ=America/Toronto
 
 android:
   components:

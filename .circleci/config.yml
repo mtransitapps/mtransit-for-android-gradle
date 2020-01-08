@@ -11,6 +11,7 @@ jobs:
       JAVA_OPTS: -Xmx3200m
       GRADLE_OPTS: -Xmx3200m
       TERM: xterm-256color
+      TZ: "America/Toronto"
     steps:
       - run:
           name: Install GAWK
