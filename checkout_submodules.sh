@@ -1,5 +1,20 @@
 #!/bin/bash
+# ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 #NO DEPENDENCY <= EXECUTED BEFORE GIT SUBMODULE
+
+IS_SHALLOW=$(git rev-parse --is-shallow-repository);
+if [[ "$IS_SHALLOW" == true ]]; then
+	echo "> Fetching unshallow GIT repo...";
+	git fetch --unshallow;
+	RESULT=$?;
+	if [[ ${RESULT} -ne 0 ]]; then
+		echo "> Error while fetching unshallow GIT repository!";
+		exit ${RESULT};
+	fi
+	echo "> Fetching unshallow GIT repo... DONE";
+else
+	echo "> Not a shallow GIT repo.";
+fi
 
 declare -a SUBMODULES=(
 	"commons"

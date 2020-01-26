@@ -1,2 +1,0 @@
-include ':app-android', // main Android app
-        ':commons-android' // common code shared by all Android apps

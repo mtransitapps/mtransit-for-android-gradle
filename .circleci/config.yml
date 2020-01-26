@@ -1,3 +1,4 @@
+# ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 version: 2
 jobs:
   build:
@@ -5,9 +6,18 @@ jobs:
     docker:
       - image: circleci/android:api-29
     environment:
+      JAVA_TOOL_OPTIONS: -Xmx3200m
       JVM_OPTS: -Xmx3200m
+      JAVA_OPTS: -Xmx3200m
+      GRADLE_OPTS: -Xmx3200m
       TERM: xterm-256color
+      TZ: "America/Toronto"
     steps:
+      - run:
+          name: Install GAWK
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install gawk
       - run:
           name: Update SDK
           command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;29.0.2" "platform-tools" "platforms;android-29"
@@ -18,11 +28,14 @@ jobs:
       - run:
           name: Checkout submodules
           command: ./checkout_submodules.sh
+      - run:
+          name: commons/sync.sh permissions
+          command: sudo chmod +x commons/sync.sh
+      - run:
+          name: Sync files
+          command: ./commons/sync.sh
       - restore_cache:
           key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - run:
-          name: init_cache_key.sh permissions
-          command: sudo chmod +x init_cache_key.sh
       - run:
           name: Generate gradle cache key
           command: ./init_cache_key.sh
@@ -31,14 +44,8 @@ jobs:
             - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
             - gradle-cache- # fallback to using the latest cache if no exact match is found
       - run:
-          name: gradlew permissions
-          command: sudo chmod +x ./gradlew
-      - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies --console=plain
-      - run:
-          name: build.sh permissions
-          command: sudo chmod +x build.sh
+          command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=2 --console=plain
       - run:
           name: Build
           command: ./build.sh

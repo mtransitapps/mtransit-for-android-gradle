@@ -1,7 +1,11 @@
+# ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
+os: linux
+dist: xenial # Ubuntu 16.04
+# dist: bionic # Ubuntu 18.04 # not compatible with OpenJDK 8
 language: android
-jdk: oraclejdk8
+jdk: openjdk8
+# jdk: openjdk11 # required for Ubuntu 18.04 Bionic
 
-sudo: false
 install: true
 
 before_cache:
@@ -18,6 +22,7 @@ env:
   global:
     - ANDROID_API_LEVEL=29
     - ANDROID_BUILD_TOOLS_VERSION=29.0.2
+    - TZ=America/Toronto
 
 android:
   components:
@@ -36,8 +41,8 @@ git:
 before_install:
   - chmod +x checkout_submodules.sh
   - ./checkout_submodules.sh
-  - chmod +x gradlew
-  - chmod +x build.sh
+  - chmod +x commons/sync.sh
+  - ./commons/sync.sh
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
