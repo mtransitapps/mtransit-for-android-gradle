@@ -20,7 +20,7 @@ jobs:
             sudo apt-get -y install gawk
       - run:
           name: Update SDK
-          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;29.0.2" "platform-tools" "platforms;android-29"
+          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;29.0.3" "platform-tools" "platforms;android-29"
       - checkout
       - run:
           name: checkout_submodules.sh permissions
