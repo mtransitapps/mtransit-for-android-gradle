@@ -7,10 +7,6 @@
     <inspection_tool class="AndroidLintUnknownNullness" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="BooleanMethodIsAlwaysInverted" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="CollectionAddAllCanBeReplacedWithConstructor" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="ConstantConditions" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
-      <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
-    </inspection_tool>
     <inspection_tool class="Convert2Diamond" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="Deprecation" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="IGNORE_INSIDE_DEPRECATED" value="true" />
@@ -31,7 +27,6 @@
     </inspection_tool>
     <inspection_tool class="PointlessNullCheck" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RegExpRedundantEscape" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="RedundantCast" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SameParameterValue" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="StringBufferReplaceableByString" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SwitchStatementWithTooFewBranches" enabled="true" level="WARNING" enabled_by_default="true">
