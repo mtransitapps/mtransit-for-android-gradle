@@ -123,7 +123,10 @@ custom_local.properties
 
 # Shared files
 /.idea/.name
+/.idea/bashsupport_project.xml
+/.idea/codeStyles/Project.xml
 /.idea/dictionaries
+/.idea/inspectionProfiles/Project_Default.xml
 /.idea/misc.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
