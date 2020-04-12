@@ -44,7 +44,7 @@ captures/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
-.idea/**/dictionaries
+# .idea/**/dictionaries # keep user's dictionaries
 .idea/**/shelf
 # Generated files
 .idea/**/contentModel.xml
@@ -122,6 +122,11 @@ keys.properties
 custom_local.properties
 
 # Shared files
+/.idea/.name
+/.idea/dictionaries
+/.idea/misc.xml
+/.idea/runConfigurations.xml
+/.idea/vcs.xml
 /build.gradle
 /build.sh
 /gitall.sh
