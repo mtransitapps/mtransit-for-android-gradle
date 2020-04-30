@@ -33,7 +33,10 @@ android:
 branches:
   only:
     - master
-    - mmathieum
+    - mmathieum #TBB
+    - /^hotfix/.*$/
+    - develop
+    - /^feature/.*$/
 
 git:
   submodules: false
