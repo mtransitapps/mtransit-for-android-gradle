@@ -14,13 +14,13 @@ jobs:
       TZ: "America/Toronto"
     steps:
       - run:
-          name: Install GAWK
+          name: Install GAWK - GNU awk
           command: |
             sudo apt-get update
             sudo apt-get -y install gawk
       - run:
           name: Update SDK
-          command: echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;29.0.3" "platform-tools" "platforms;android-29"
+          command: echo y | sdkmanager "build-tools;29.0.3" "platform-tools" "platforms;android-29"
       - checkout
       - run:
           name: checkout_submodules.sh permissions

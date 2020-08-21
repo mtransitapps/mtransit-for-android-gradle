@@ -29,6 +29,8 @@ android:
     - tools # to get the new `repository-11.xml`
     - platform-tools
     - tools # to install Android SDK tools
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
 
 branches:
   only:
