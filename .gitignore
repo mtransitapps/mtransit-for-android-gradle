@@ -68,6 +68,7 @@ captures/
 .idea/jarRepositories.xml
 .idea/modules.xml
 .idea/*.iml
+.idea/misc.xml
 .idea/modules
 *.iml
 *.ipr
@@ -128,7 +129,6 @@ custom_local.properties
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/dictionaries
 /.idea/inspectionProfiles/Project_Default.xml
-/.idea/misc.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
 /build.gradle
