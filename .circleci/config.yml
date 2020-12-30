@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/mtransit
     docker:
-      - image: circleci/android:api-29
+      - image: circleci/android:api-30
         auth:
           username: montransit
           password: $MT_DOCKER_PASSWORD
@@ -23,7 +23,7 @@ jobs:
             sudo apt-get -y install gawk
       - run:
           name: Update SDK
-          command: echo y | sdkmanager "build-tools;29.0.3" "platform-tools" "platforms;android-29"
+          command: echo y | sdkmanager "build-tools;30.0.2" "platform-tools" "platforms;android-30"
       - checkout
       - run:
           name: checkout_submodules.sh permissions

@@ -1,16 +1,45 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 os: linux
-dist: xenial # Ubuntu 16.04
-# dist: bionic # Ubuntu 18.04 # not compatible with OpenJDK 8
-language: android
-jdk: openjdk8
-# jdk: openjdk11 # required for Ubuntu 18.04 Bionic
 
-install: true
+# dist: precise # Ubuntu 12.04.x LTS (Precise Pangolin)
+# dist: trusty # Ubuntu 14.04.x LTS (Trusty Tahr)
+dist: xenial # Ubuntu 16.04.x LTS (Xenial Xerus)
+# dist: xenial # Ubuntu 18.04.x LTS (Bionic Beaver)
+# dist: focal # Ubuntu 20.04.x LTS (Focal Fossa)
 
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+language: android # requested Linux distribution not always honored!
+# language: java # required installing Android SDK Tools manually
+
+jdk: openjdk11
+
+sudo: required
+
+git:
+  submodules: false
+
+branches:
+  only:
+    - master #TBR main|prod
+    - mmathieum #TBR dev|ready|pull
+    - /^hotfix/.*$/
+    - develop
+    - /^feature/.*$/
+
+env:
+  global:
+    - ANDROID_API_LEVEL=30
+    - ANDROID_BUILD_TOOLS_VERSION=30.0.2
+    - TZ=America/Toronto
+
+android:
+  components:
+    - tools # to get the new repositories
+    - platform-tools
+    - tools # to install Android SDK tools
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+  licenses:
+    - 'android-sdk-license-.+'
 
 cache:
   directories:
@@ -18,32 +47,12 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-env:
-  global:
-    - ANDROID_API_LEVEL=29
-    - ANDROID_BUILD_TOOLS_VERSION=29.0.3
-    - TZ=America/Toronto
-
-android:
-  components:
-    - tools # to get the new `repository-11.xml`
-    - platform-tools
-    - tools # to install Android SDK tools
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-$ANDROID_API_LEVEL
-
-branches:
-  only:
-    - master
-    - mmathieum #TBB
-    - /^hotfix/.*$/
-    - develop
-    - /^feature/.*$/
-
-git:
-  submodules: false
+# STEPS:
+# https://docs.travis-ci.com/user/job-lifecycle/
 
 before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install gawk # GNU Awk v4+ required
   - chmod +x checkout_submodules.sh
   - ./checkout_submodules.sh
   - chmod +x commons/sync.sh
@@ -52,7 +61,12 @@ before_install:
   - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
   - touch ~/.android/repositories.cfg
-  - sdkmanager tools
+
+install: true
 
 script:
   - ./build.sh
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
