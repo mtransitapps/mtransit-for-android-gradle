@@ -4,20 +4,21 @@
 
 IS_SHALLOW=$(git rev-parse --is-shallow-repository);
 if [[ "$IS_SHALLOW" == true ]]; then
-	echo "> Fetching unshallow GIT repo...";
+	echo "> Fetching un-shallow GIT repo...";
 	git fetch --unshallow;
 	RESULT=$?;
 	if [[ ${RESULT} -ne 0 ]]; then
-		echo "> Error while fetching unshallow GIT repository!";
+		echo "> Error while fetching un-shallow GIT repository!";
 		exit ${RESULT};
 	fi
-	echo "> Fetching unshallow GIT repo... DONE";
+	echo "> Fetching un-shallow GIT repo... DONE";
 else
 	echo "> Not a shallow GIT repo.";
 fi
 
 declare -a SUBMODULES=(
 	"commons"
+	"commons-java"
 	"commons-android"
 	"app-android"
 );
