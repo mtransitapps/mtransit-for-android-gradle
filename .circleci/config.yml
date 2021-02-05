@@ -76,3 +76,7 @@ jobs:
           path: app-android/build/test-results
       - store_test_results:
           path: commons-android/build/test-results
+      - store_test_results:
+          path: commons-java/build/test-results
+      - store_test_results:
+          path: parser/build/test-results
