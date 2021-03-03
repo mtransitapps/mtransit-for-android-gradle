@@ -44,8 +44,9 @@ jobs:
       - run:
           name: Sync files
           command: ./commons/sync.sh
-      - android/restore-build-cache
-      - android/restore-gradle-cache
+      - android/restore-build-cache:
+          cache-prefix: build-cache
+      - android/restore-gradle-cache:
           cache-prefix: gradle-cache
           # find-args: . -name 'build.gradle'
           find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
@@ -72,8 +73,9 @@ jobs:
     #       paths:
     #         - ~/.gradle/wrapper/
     #       key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - android/save-build-cache
-      - android/save-gradle-cache
+      - android/save-build-cache:
+          cache-prefix: build-cache
+      - android/save-gradle-cache:
           cache-prefix: gradle-cache
       - store_artifacts:
           path: app-android/build/reports
