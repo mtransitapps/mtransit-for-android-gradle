@@ -16,9 +16,9 @@ jobs:
     #   sdk-version: "30"
     resource_class: medium # small, medium (default), medium+, large, xlarge
     environment:
-      JAVA_TOOL_OPTIONS: -Xms1024m -Xmx4g
-      JVM_OPTS: -Xms1024m -Xmx4g
-      JAVA_OPTS: -Xms1024m -Xmx4g
+      JAVA_TOOL_OPTIONS: -Xms1024m -Xmx3200m
+      JVM_OPTS: -Xms1024m -Xmx3200m
+      JAVA_OPTS: -Xms1024m -Xmx3200m
       GRADLE_OPTS: -Xms1024m -Xmx3200m -XX:MaxPermSize3200m -XX:+HeapDumpOnOutOfMemoryError
       TERM: xterm-256color
       TZ: "America/Toronto"
