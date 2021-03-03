@@ -49,7 +49,7 @@ jobs:
       - android/restore-gradle-cache:
           cache-prefix: gradle-cache
           # find-args: . -name 'build.gradle'
-          find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
+          # find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
     #   - restore_cache:
     #       key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
     #   - run:
