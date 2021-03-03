@@ -11,16 +11,14 @@ jobs:
         auth:
           username: montransit
           password: $MT_DOCKER_PASSWORD
-    # executor:
-    #   name: android/android
-    #   sdk-version: "30"
-    resource_class: medium # small, medium (default), medium+, large, xlarge
+    # resource_class: medium # small, medium (default), medium+, large, xlarge
     environment:
       JAVA_TOOL_OPTIONS: -Xmx3200m
       JVM_OPTS: -Xmx3200m
       JAVA_OPTS: -Xmx3200m
+      GRADLE_OPTS: -Xmx3200m
       # GRADLE_OPTS: -Xms1024m -Xmx3200m -XX:MaxPermSize=3200m -XX:MaxMetaspaceSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled -XX:+HeapDumpOnOutOfMemoryError
-      GRADLE_OPTS: -Xms1g -Xmx4g -XX:MaxPermSize=2g -XX:MaxMetaspaceSize=1g -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError
+      # GRADLE_OPTS: -Xms1g -Xmx4g -XX:MaxPermSize=2g -XX:MaxMetaspaceSize=1g -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError
       # GRADLE_OPTS: -Xms512M -Xmx4g -XX:MaxPermSize=1024m -XX:MaxMetaspaceSize=1g -Dkotlin.daemon.jvm.options="-Xmx1g"
       TERM: xterm-256color
       TZ: "America/Toronto"
@@ -31,9 +29,9 @@ jobs:
             sudo apt-get update
             sudo apt-get -y install gawk
       - android/accept-licenses
-    #   - run:
-    #       name: Update SDK
-    #       command: echo y | sdkmanager "build-tools;30.0.3" "platform-tools" "platforms;android-30"
+      - run:
+          name: Update SDK
+          command: echo y | sdkmanager "build-tools;30.0.3" "platform-tools" "platforms;android-30"
       - checkout
       - run:
           name: checkout_submodules.sh permissions
@@ -51,31 +49,30 @@ jobs:
           cache-prefix: build-cache
       - android/restore-gradle-cache:
           cache-prefix: gradle-cache
-          # find-args: . -name 'build.gradle'
-          find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
-    #   - restore_cache:
-    #       key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-    #   - run:
-    #       name: Generate gradle cache key
-    #       command: ./init_cache_key.sh
-    #   - restore_cache:
-    #       keys:
-    #         - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
-    #         - gradle-cache- # fallback to using the latest cache if no exact match is found
+          find-args: . -type f \( -name "*.gradle" -o -name "gradle-wrapper.properties" \)
+      # - restore_cache:
+      #     key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      #   - run:
+      #     name: Generate gradle cache key
+      #     command: ./init_cache_key.sh
+      #   - restore_cache:
+      #     keys:
+      #       - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+      #       - gradle-cache- # fallback to using the latest cache if no exact match is found
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=2 --console=plain -Dkotlin.compiler.execution.strategy=in-process
+          command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=2 --console=plain
       - run:
           name: Build
           command: ./build.sh
-    #   - save_cache:
-    #       paths:
-    #         - ~/.gradle/caches/
-    #       key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
-    #   - save_cache:
-    #       paths:
-    #         - ~/.gradle/wrapper/
-    #       key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/.gradle/caches/
+      #     key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/.gradle/wrapper/
+      #     key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - android/save-build-cache:
           cache-prefix: build-cache
       - android/save-gradle-cache:
@@ -102,11 +99,3 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit 
-    #   - store_test_results:
-    #       path: app-android/build/test-results
-    #   - store_test_results:
-    #       path: commons-android/build/test-results
-    #   - store_test_results:
-    #       path: commons-java/build/test-results
-    #   - store_test_results:
-    #       path: parser/build/test-results
