@@ -1,6 +1,7 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 version: 2.1
 orbs:
+  # https://circleci.com/developer/orbs/orb/circleci/android
   android: circleci/android@1.0.2
 jobs:
   build:
@@ -15,10 +16,10 @@ jobs:
     #   sdk-version: "30"
     resource_class: medium # small, medium (default), medium+, large, xlarge
     environment:
-      JAVA_TOOL_OPTIONS: -Xmx5g
-      JVM_OPTS: -Xmx5g
-      JAVA_OPTS: -Xmx5g
-      GRADLE_OPTS: -Xmx5g
+      JAVA_TOOL_OPTIONS: -Xmx4g
+      JVM_OPTS: -Xmx4g
+      JAVA_OPTS: -Xmx4g
+      GRADLE_OPTS: -Xmx4g
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
@@ -49,7 +50,7 @@ jobs:
       - android/restore-gradle-cache:
           cache-prefix: gradle-cache
           # find-args: . -name 'build.gradle'
-          # find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
+          find-args: . -type f \( -name "build.gradle" -o -name "dependencies.gradle" -o -name "gradle-wrapper.properties" \)
     #   - restore_cache:
     #       key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
     #   - run:
