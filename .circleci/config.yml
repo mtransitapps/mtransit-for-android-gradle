@@ -5,14 +5,14 @@ orbs:
 jobs:
   build:
     working_directory: ~/mtransit
-    # docker:
-    #   - image: circleci/android:api-30
-    #     auth:
-    #       username: montransit
-    #       password: $MT_DOCKER_PASSWORD
-    executor:
-      name: android/android
-      sdk-version: "30"
+    docker:
+      - image: circleci/android:api-30
+        auth:
+          username: montransit
+          password: $MT_DOCKER_PASSWORD
+    # executor:
+    #   name: android/android
+    #   sdk-version: "30"
     resource-class: large # small, medium (default), medium+, large, xlarge
     environment:
       JAVA_TOOL_OPTIONS: -Xmx5g
