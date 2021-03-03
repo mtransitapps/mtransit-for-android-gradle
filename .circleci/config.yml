@@ -19,7 +19,8 @@ jobs:
       JAVA_TOOL_OPTIONS: -Xmx3200m
       JVM_OPTS: -Xmx3200m
       JAVA_OPTS: -Xmx3200m
-      GRADLE_OPTS: -Xms1024m -Xmx3200m -XX:MaxPermSize=3200m -XX:+HeapDumpOnOutOfMemoryError
+      # GRADLE_OPTS: -Xms1024m -Xmx3200m -XX:MaxPermSize=3200m -XX:MaxMetaspaceSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled -XX:+HeapDumpOnOutOfMemoryError
+      GRADLE_OPTS: -Xms512M -Xmx4g -XX:MaxPermSize=1024m -XX:MaxMetaspaceSize=1g -Dkotlin.daemon.jvm.options="-Xmx1g"
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
