@@ -12,7 +12,7 @@ jobs:
     #       password: $MT_DOCKER_PASSWORD
     executor:
       name: android/android
-      sdk-version: '30'
+      sdk-version: "30"
       resource-class: large # small, medium (default), medium+, large, xlarge
     environment:
       JAVA_TOOL_OPTIONS: -Xmx5g
