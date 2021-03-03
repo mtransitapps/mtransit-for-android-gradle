@@ -13,7 +13,7 @@ jobs:
     # executor:
     #   name: android/android
     #   sdk-version: "30"
-    resource_class: large # small, medium (default), medium+, large, xlarge
+    resource_class: medium # small, medium (default), medium+, large, xlarge
     environment:
       JAVA_TOOL_OPTIONS: -Xmx5g
       JVM_OPTS: -Xmx5g
