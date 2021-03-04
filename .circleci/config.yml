@@ -53,9 +53,9 @@ jobs:
           name: Generate gradle cache key
           command: ./init_cache_key.sh
       - restore_cache:
-        keys:
-          - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
-          - gradle-cache- # fallback to using the latest cache if no exact match is found
+          keys:
+            - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+            - gradle-cache- # fallback to using the latest cache if no exact match is found
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=1 --console=plain
