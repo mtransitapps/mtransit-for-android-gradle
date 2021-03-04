@@ -122,6 +122,9 @@ fastlane/readme.md
 keys.properties
 custom_local.properties
 
+# DEV files
+dev.properties
+
 # Shared files
 /.idea/.name
 /.idea/bashsupport_project.xml
