@@ -17,9 +17,6 @@ jobs:
       JVM_OPTS: -Xmx3200m
       JAVA_OPTS: -Xmx3200m
       GRADLE_OPTS: -Xmx3200m
-      # GRADLE_OPTS: -Xms1024m -Xmx3200m -XX:MaxPermSize=3200m -XX:MaxMetaspaceSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled -XX:+HeapDumpOnOutOfMemoryError
-      # GRADLE_OPTS: -Xms1g -Xmx4g -XX:MaxPermSize=2g -XX:MaxMetaspaceSize=1g -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError
-      # GRADLE_OPTS: -Xms512M -Xmx4g -XX:MaxPermSize=1024m -XX:MaxMetaspaceSize=1g -Dkotlin.daemon.jvm.options="-Xmx1g"
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
@@ -46,37 +43,37 @@ jobs:
           name: Sync files
           command: ./commons/sync.sh
       - android/restore-build-cache:
-          cache-prefix: build-cache
-      - android/restore-gradle-cache:
-          cache-prefix: gradle-cache
-          find-args: . -type f \( -name "*.gradle" -o -name "gradle-wrapper.properties" \)
-      # - restore_cache:
-      #     key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      #   - run:
-      #     name: Generate gradle cache key
-      #     command: ./init_cache_key.sh
-      #   - restore_cache:
-      #     keys:
-      #       - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
-      #       - gradle-cache- # fallback to using the latest cache if no exact match is found
+          cache-prefix: android-build-cache
+      # - android/restore-gradle-cache:
+      # cache-prefix: gradle-cache
+      # find-args: . -type f \( -name "*.gradle" -o -name "gradle-wrapper.properties" \)
+      - restore_cache:
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - run:
+          name: Generate gradle cache key
+          command: ./init_cache_key.sh
+      - restore_cache:
+        keys:
+          - gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+          - gradle-cache- # fallback to using the latest cache if no exact match is found
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=1 --console=plain
       - run:
           name: Build
           command: ./build.sh
-      # - save_cache:
-      #     paths:
-      #       - ~/.gradle/caches/
-      #     key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
-      # - save_cache:
-      #     paths:
-      #       - ~/.gradle/wrapper/
-      #     key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches/
+          key: gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper/
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - android/save-build-cache:
-          cache-prefix: build-cache
-      - android/save-gradle-cache:
-          cache-prefix: gradle-cache
+          cache-prefix: android-build-cache
+      # - android/save-gradle-cache:
+      # cache-prefix: gradle-cache
       - store_artifacts:
           path: app-android/build/reports
           destination: reports
@@ -98,4 +95,4 @@ jobs:
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit 
+          path: ~/test-results/junit
