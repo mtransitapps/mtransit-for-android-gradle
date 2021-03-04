@@ -61,7 +61,7 @@ jobs:
       #       - gradle-cache- # fallback to using the latest cache if no exact match is found
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=2 --console=plain
+          command: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=1 --console=plain
       - run:
           name: Build
           command: ./build.sh
