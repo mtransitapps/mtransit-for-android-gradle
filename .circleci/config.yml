@@ -15,8 +15,8 @@ jobs:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx3333m
       JVM_OPTS: -Xmx3333m
-      JAVA_OPTS: -Xmx3333m
-      GRADLE_OPTS: -Xmx3333m
+      JAVA_OPTS: -Xmx3333m -Dorg.gradle.jvmargs="-Xms2g -Xmx3333m -XX:MaxPermSize=3333m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      GRADLE_OPTS: -Xmx3333m -Dorg.gradle.jvmargs="-Xms2g -Xmx3333m -XX:MaxPermSize=3333m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
