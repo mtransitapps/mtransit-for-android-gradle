@@ -19,7 +19,7 @@ before_script:
   - ls -l #DEBUG
   - ls -l cmdline-tools #DEBUG
   - popd
-  - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/tools/bin/
+  - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/bin/
   # PRINT VERSION
   - sdkmanager --version
   # INSTALL ANDROID SDK
