@@ -9,16 +9,24 @@ variables:
 before_script:
   - apt-get --quiet update --yes
   - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
-  # DOWNLOAD ANDROID SDK TOOLS
-  - wget --quiet --output-document=commandlinetools-linux.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
-  - unzip -d android-sdk-linux commandlinetools-linux.zip
+  # SETUP PATH
+  - export ANDROID_HOME="${PWD}/android-home"
+  - install -d $ANDROID_HOME # create new directory
+  # DOWNLOAD ANDROID COMMAND LINE TOOLS FOR LINUX
+  - wget --output-document=$ANDROID_HOME/cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
+  - pushd $ANDROID_HOME
+  - unzip -d cmdline-tools cmdline-tools.zip
+  - popd
+  - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/tools/bin/
+  # PRINT VERSION
+  - sdkmanager --version
   # INSTALL ANDROID SDK
-  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
-  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager "platform-tools" >/dev/null
-  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+  - yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses || true
+  - sdkmanager --sdk_root=${ANDROID_HOME} "platforms;android-${ANDROID_COMPILE_SDK}"
+  - sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools"
+  - sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}"
   # SETUP ENV
-  - export ANDROID_HOME=$PWD/android-sdk-linux
-  - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+  - export PATH=$PATH:$ANDROID_HOME/platform-tools/
   - chmod +x checkout_submodules.sh
   - ./checkout_submodules.sh
   - chmod +x commons/sync.sh
