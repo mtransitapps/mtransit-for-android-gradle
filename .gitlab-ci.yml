@@ -21,7 +21,7 @@ before_script:
   - popd
   - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/bin/
   # PRINT VERSION
-  - sdkmanager --version
+  - sdkmanager --sdk_root=${ANDROID_HOME} --version
   # INSTALL ANDROID SDK
   - yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses || true
   - sdkmanager --sdk_root=${ANDROID_HOME} "platforms;android-${ANDROID_COMPILE_SDK}"
