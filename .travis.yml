@@ -4,7 +4,7 @@ os: linux
 # dist: precise # Ubuntu 12.04.x LTS (Precise Pangolin)
 # dist: trusty # Ubuntu 14.04.x LTS (Trusty Tahr)
 dist: xenial # Ubuntu 16.04.x LTS (Xenial Xerus)
-# dist: xenial # Ubuntu 18.04.x LTS (Bionic Beaver)
+# dist: bionic # Ubuntu 18.04.x LTS (Bionic Beaver)
 # dist: focal # Ubuntu 20.04.x LTS (Focal Fossa)
 
 language: android # requested Linux distribution not always honored!
