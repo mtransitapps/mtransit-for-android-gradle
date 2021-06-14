@@ -4,7 +4,7 @@ orbs:
   # https://circleci.com/developer/orbs/orb/circleci/android
   android: circleci/android@1.0.3
 jobs:
-  mt_build:
+  build:
     working_directory: ~/mtransit
     docker:
       - image: circleci/android:api-30
