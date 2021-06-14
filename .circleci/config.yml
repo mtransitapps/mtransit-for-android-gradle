@@ -2,9 +2,9 @@
 version: 2.1
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/android
-  android: circleci/android@1.0.2
+  android: circleci/android@1.0.3
 jobs:
-  build:
+  mt-build:
     working_directory: ~/mtransit
     docker:
       - image: circleci/android:api-30
@@ -13,10 +13,10 @@ jobs:
           password: $MT_DOCKER_PASSWORD
     # resource_class: medium # small, medium (default), medium+, large, xlarge
     environment: # https://circleci.com/docs/2.0/java-oom/ (-XX:MaxRAMPercentage=90.0 )
-      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=90.0
-      JVM_OPTS: -XX:MaxRAMPercentage=90.0
-      JAVA_OPTS: -XX:MaxRAMPercentage=90.0 -Dorg.gradle.jvmargs="-XX:MaxRAMPercentage=90.0 -Dfile.encoding=UTF-8"
-      GRADLE_OPTS: -XX:MaxRAMPercentage=90.0 -Dorg.gradle.jvmargs="-XX:MaxRAMPercentage=90.0 -Dfile.encoding=UTF-8"
+      JAVA_TOOL_OPTIONS: -Xmx3737m
+      JVM_OPTS: -Xmx3737m
+      AVA_OPTS: -Xmx3737m -Dorg.gradle.jvmargs="-Xms1g -Xmx3737m -XX:MaxPermSize=3737m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      GRADLE_OPTS: -Xmx3737m -Dorg.gradle.jvmargs="-Xms1g -Xmx3737m -XX:MaxPermSize=3737m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
