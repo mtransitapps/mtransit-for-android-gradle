@@ -24,8 +24,9 @@ jobs:
     #       ls ${{ github.workspace }}
       - name: MT code sync
         # TODO if ....
+        if: github.event_name != 'pull_request'
         run: |
-          git submodule foreach git checkout ${{ env.BRANCH_NAME }}
+          git submodule foreach git checkout ${{ github.ref }}
           git submodule foreach git pull
       - name: MT code setup
         run: ./commons/code_setup.sh
