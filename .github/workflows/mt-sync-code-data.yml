@@ -15,7 +15,10 @@ jobs:
     needs: MT-SETUP-GIT
     steps:
       - name: MT code setup
-        run: ./commons/code_setup.sh
+        run:  |
+          chmod +x ./commons/code_setup.sh
+          ./commons/code_setup.sh
+        shell: bash
         # run: "${GITHUB_WORKSPACE}/commons/code_setup.sh"
         # run: bash ./commons/code_setup.sh
   MT-SETUP-DEPENDENCIES:
