@@ -12,6 +12,10 @@ jobs:
           submodules: false
       - name: MT check out submodules
         run: ./checkout_submodules.sh
+      - name: MT setup MT_GIT_BRANCH env
+        if: github.event_name != 'pull_request'
+        run: |
+           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       # - name: List files in the repository
       #   run: |
       #     ls ${{ github.workspace }}
@@ -26,7 +30,7 @@ jobs:
         # TODO if ....
         if: github.event_name != 'pull_request'
         run: |
-          git submodule foreach git checkout ${{ github.ref }}
+          git submodule foreach git checkout ${MT_GIT_BRANCH}
           git submodule foreach git pull
       - name: MT code setup
         run: ./commons/code_setup.sh
