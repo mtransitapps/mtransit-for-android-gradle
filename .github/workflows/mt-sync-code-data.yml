@@ -15,8 +15,9 @@ jobs:
     needs: MT-SETUP-GIT
     steps:
       - name: MT code setup
-        run: bash ./commons/code_setup.sh
+        run: ./commons/code_setup.sh
         # run: "${GITHUB_WORKSPACE}/commons/code_setup.sh"
+        # run: bash ./commons/code_setup.sh
   MT-SETUP-DEPENDENCIES:
     runs-on: ubuntu-latest
     needs:  MT-SETUP-CODE
