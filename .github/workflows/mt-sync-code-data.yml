@@ -6,11 +6,11 @@ jobs:
   MT-SYNC-CODE-DATA-JOB:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: MT check out main repository code (no submodules)
         uses: actions/checkout@v2
         with:
           submodules: false
-      - name: MT checkout submodules
+      - name: MT check out submodules
         run: ./checkout_submodules.sh
       # - name: List files in the repository
       #   run: |
@@ -28,18 +28,18 @@ jobs:
         # run:  |
         #   chmod +x ./commons/code_setup.sh
         #   ./commons/code_setup.sh
-        shell: bash
+        # shell: bash
         # run: bash ./commons/code_setup.sh
   # MT-SETUP-DEPENDENCIES:
   #   runs-on: ubuntu-latest
   #   needs:  MT-SETUP-CODE
   #   steps:
-      - name: Set up JDK 1.8
+      - name: MT set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt-hotspot' # 'adopt'
           java-version: '11'
-      - name: MT Gradle wrapper
+      - name: MT cache > Gradle wrapper
         uses: actions/cache@v2
         with:
           path: |
@@ -49,7 +49,7 @@ jobs:
             gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
       - name: MT Gradle cache > Generate key
         run: ./init_cache_key.sh
-      - name: MT Gradle cache
+      - name: MT cache > Gradle cache
         uses: actions/cache@v2
         with:
           path: |
@@ -58,8 +58,11 @@ jobs:
           restore-keys: |
             gradle-cache-${{ hashFiles('gradle_cache_key_checksum.txt') }}
             gradle-cache- # fallback to using the latest cache if no exact match is found
-      - name: MT Download Dependencies
+      - name: MT download dependencies
         run: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=1 --console=plain
+      - name: MT sync code
+        # TODO if: true
+        run: ./commons/code_sync.sh
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
