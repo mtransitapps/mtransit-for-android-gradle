@@ -81,6 +81,8 @@ jobs:
       #   git git commit -m "CI: Code Sync"
       - name: MT build & test
         run: ./build_and_test.sh
+        env:
+          MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: DEBUG List files in the repository
         run: |
           ls ${{ github.workspace }}
