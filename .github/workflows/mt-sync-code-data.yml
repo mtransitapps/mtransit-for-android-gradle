@@ -1,0 +1,15 @@
+name: MT SYNC CODE, DOWNLOAD & PARSE
+on: workflow_dispatch # manual
+jobs:
+  MT-SETUP-GIT:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+      - name: MT checkout submodules
+        run: ./checkout_submodules.sh
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
