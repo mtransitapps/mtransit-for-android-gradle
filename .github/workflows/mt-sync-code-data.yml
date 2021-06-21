@@ -25,9 +25,8 @@ jobs:
       - name: MT code sync
         # TODO if ....
         run: |
-        git submodule foreach git checkout ${{ env.BRANCH_NAME }}
-        git submodule foreach git pull
-
+          git submodule foreach git checkout ${{ env.BRANCH_NAME }}
+          git submodule foreach git pull
       - name: MT code setup
         run: ./commons/code_setup.sh
         # run: "${GITHUB_WORKSPACE}/commons/code_setup.sh"
