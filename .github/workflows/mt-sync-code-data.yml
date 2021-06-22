@@ -1,5 +1,9 @@
-name: MT SYNC CODE & DATA # download & paser
+name: MT SYNC CODE & DATA # download & parse
 on: workflow_dispatch # manual
+# on:
+#   schedule:  TODO
+#     cron: 0 0 * * 1 # 0 0 * * MON # WEEKLY
+#     # cron: 0 0 * * 1,4 # 0 0 * * MON,THU #BI-WEEKLY
 # gh workflow run mt-sync-code-data.yml --ref mmathieum
 # gh run list --workflow=mt-sync-code-data.yml
 jobs:
@@ -10,40 +14,21 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: false
+          # fetch-depth: 0 # fetch all (not required util release build)
       - name: MT check out submodules
         run: ./checkout_submodules.sh
       - name: MT setup MT_GIT_BRANCH env
         if: github.event_name != 'pull_request'
         run: |
            echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      # - name: List files in the repository
-      #   run: |
-      #     ls ${{ github.workspace }}
-  # MT-SETUP-CODE:
-  #   runs-on: ubuntu-latest
-  #   needs: MT-SETUP-GIT
-    # steps:
-    #   - name: List files in the repository
-    #     run: |
-    #       ls ${{ github.workspace }}
       - name: MT code sync
-        # TODO if ....
-        if: github.event_name != 'pull_request'
+        # if: github.event_name != 'pull_request'
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: |
           git submodule foreach git checkout ${MT_GIT_BRANCH}
           git submodule foreach git pull
       - name: MT code setup
         run: ./commons/code_setup.sh
-        # run: "${GITHUB_WORKSPACE}/commons/code_setup.sh"
-        # run:  |
-        #   chmod +x ./commons/code_setup.sh
-        #   ./commons/code_setup.sh
-        # shell: bash
-        # run: bash ./commons/code_setup.sh
-  # MT-SETUP-DEPENDENCIES:
-  #   runs-on: ubuntu-latest
-  #   needs:  MT-SETUP-CODE
-  #   steps:
       - name: MT set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -69,26 +54,16 @@ jobs:
             gradle-cache-${{ hashFiles('gradle_cache_key_checksum.txt') }}
             gradle-cache- # fallback to using the latest cache if no exact match is found
       - name: MT download dependencies
-        run: ./gradlew androidDependencies --no-daemon --no-parallel --no-configure-on-demand --max-workers=1 --console=plain
-      # - name: MT sync code
-      #   # TODO if: true
-      #   run: ./commons/code_sync.sh
-      # TODO? - name: MT sync code commit
-      #   run: |
-      #   git submodule foreach git add .
-      #   git submodule foreach git commit -m "CI: Code Sync"
-      #   git add .
-      #   git git commit -m "CI: Code Sync"
+        run: ./download_dependencies.sh
       - name: MT test
         run: ./test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
-      # ARTIFACT > TEST RESULTS & REPORTS
-      - name: MT artifact > unit tests results
+      - name: MT artifact > unit tests XML results
         uses: actions/upload-artifact@v2
         if: ${{ always() }} # evern if tests fails
         with:
-          name: unit-test-results
+          name: unit-test-xml-results
           path: |
             */build/test-results/**/*.xml
             */build/test-results/*.xml
@@ -101,72 +76,17 @@ jobs:
           path: |
             */build/reports/
             !**/*.xml
-      #  !*/build/reports/*.xml
-      # # ARTIFACT > COMMONS-JAVA
-      # - name: MT artifact > commons-java > test-results
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: commons-java-test-results
-      #     path: commons-java/build/test-results
-      # - name: MT artifact > commons-java > reports
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: commons-java-reports
-      #     path: commons-java/build/reports
-      # # ARTIFACT > PARSER
-      # - name: MT artifact > parser > test-results
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: parser-test-results
-      #     path: parser/build/test-results
-      # - name: MT artifact > parser > reports
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: parser-reports
-      #     path: parser/build/reports
-      # # ARTIFACT > COMMONS-ANDROID
-      # - name: MT artifact > commons-android > test-results
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: commons-android-test-results
-      #     path: commons-android/build/test-results
-      # - name: MT artifact > commons-android > reports
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: commons-android-reports
-      #     path: commons-android/build/reports
-      # # ARTIFACT > APP-ANDROID
-      # - name: MT artifact > app-android > test-results
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: app-android-test-results
-      #     path: app-android/build/test-results
-      # - name: MT artifact > app-android > reports
-      #   uses: actions/upload-artifact@v2
-      #   if: ${{ always() }} # evern if tests fails
-      #   with:
-      #     name: app-android-reports
-      #     path: app-android/build/reports
-      # ARTIFACT > APK & ABB
-      - name: MT artifact > app-android > apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-android-apk
-          path: app-android/build/outputs/apk
-      - name: MT artifact > app-android > bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-android-bundle
-          path: app-android/build/outputs/bundle
       - name: MT download & parse
         run: ./download_and_parse.sh
+      - name: MT assemble release (APK & ABB)
+        run: ./assemble_release.sh
+      - name: MT artifact > app-android > APK & ABB
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-android-apk-bundle
+          path: }
+          app-android/build/outputs/apk
+          app-android/build/outputs/bundle
       - name: DEBUG GIT STATUS
         run: |
           git status -sb

@@ -134,9 +134,11 @@ dev.properties
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
+/assemble_release.sh
 /build.gradle
 /build.sh
 /download_and_parse.sh
+/download_dependencies.sh
 /gitall.sh
 /gradle.properties
 /gradle/
