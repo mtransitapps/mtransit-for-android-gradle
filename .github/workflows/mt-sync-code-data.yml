@@ -84,18 +84,22 @@ jobs:
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       # ARTIFACT > TEST RESULTS & REPORTS
-      - name: MT artifact > build test-results
+      - name: MT artifact > unit tests results
         uses: actions/upload-artifact@v2
         if: ${{ always() }} # evern if tests fails
         with:
-          name: build-test-results
-          path: '*/build/test-results/*'
-      - name: MT artifact > build reports
+          name: unit-test-results
+          path: |
+            '*/build/test-results/**/*.xml'
+            '*/build/reports/**/*.xml'
+      - name: MT artifact > HTML reports
         uses: actions/upload-artifact@v2
         if: ${{ always() }} # evern if tests fails
         with:
-          name: build-reports
-          path: '*/build/reports/*'
+          name: html-reports
+          path: |
+            '*/build/reports/*'
+            '*/build/reports/**/*.xml'
       # # ARTIFACT > COMMONS-JAVA
       # - name: MT artifact > commons-java > test-results
       #   uses: actions/upload-artifact@v2
@@ -161,6 +165,10 @@ jobs:
           path: app-android/build/outputs/bundle
       - name: MT download & parse
         run: ./download_and_parse.sh
-      - name: DEBUG List files in the repository
+      - name: DEBUG GIT STATUS
+        run: |
+          git status -sb
+          git submodule foreach git status -sb
+      - name: DEBUG LIST FILES
         run: |
           ls ${{ github.workspace }}

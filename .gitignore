@@ -136,9 +136,12 @@ dev.properties
 /.idea/vcs.xml
 /build.gradle
 /build.sh
+/build_and_test.sh
+/download_and_parse.sh
 /gitall.sh
 /gradle.properties
 /gradle/
+/gradle_cache_key_checksum.txt
 /gradlew
 /gradlew.bat
 /init_cache_key.sh
