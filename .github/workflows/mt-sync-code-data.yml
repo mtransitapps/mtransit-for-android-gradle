@@ -85,8 +85,8 @@ jobs:
         with:
           name: app-android-apk-bundle
           path: |
-          app-android/build/outputs/apk
-          app-android/build/outputs/bundle
+            app-android/build/outputs/apk
+            app-android/build/outputs/bundle
       - name: DEBUG GIT STATUS
         run: |
           git status -sb
