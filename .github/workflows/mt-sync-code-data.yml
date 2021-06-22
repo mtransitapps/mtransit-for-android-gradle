@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-android-apk-bundle
-          path: }
+          path: |
           app-android/build/outputs/apk
           app-android/build/outputs/bundle
       - name: DEBUG GIT STATUS
