@@ -90,16 +90,18 @@ jobs:
         with:
           name: unit-test-results
           path: |
-            '*/build/test-results/**/*.xml'
-            '*/build/reports/**/*.xml'
+            */build/test-results/**/*.xml
+            */build/test-results/*.xml
+            */build/reports/*.xml
       - name: MT artifact > HTML reports
         uses: actions/upload-artifact@v2
         if: ${{ always() }} # evern if tests fails
         with:
           name: html-reports
           path: |
-            '*/build/reports/*'
-            '*/build/reports/**/*.xml'
+            */build/reports/
+            !**/*.xml
+      #  !*/build/reports/*.xml
       # # ARTIFACT > COMMONS-JAVA
       # - name: MT artifact > commons-java > test-results
       #   uses: actions/upload-artifact@v2
