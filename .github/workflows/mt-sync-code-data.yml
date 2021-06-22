@@ -83,6 +83,60 @@ jobs:
         run: ./build_and_test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
+      # ARTIFACT > COMMONS-JAVA
+      - name: MT artifact > commons-java > test-results
+        uses: actions/upload-artifact@v2
+        with:
+          name: commons-java-test-results
+          path: commons-java/build/test-results
+      - name: MT artifact > commons-java > reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: commons-java-reports
+          path: commons-java/build/reports
+      # ARTIFACT > PARSER
+      - name: MT artifact > parser > test-results
+        uses: actions/upload-artifact@v2
+        with:
+          name: parser-test-results
+          path: parser/build/test-results
+      - name: MT artifact > parser > reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: parser-reports
+          path: parser/build/reports
+      # ARTIFACT > COMMONS-ANDROID
+      - name: MT artifact > commons-android > test-results
+        uses: actions/upload-artifact@v2
+        with:
+          name: commons-android-test-results
+          path: commons-android/build/test-results
+      - name: MT artifact > commons-android > reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: commons-android-reports
+          path: commons-android/build/reports
+      # ARTIFACT > APP-ANDROID
+      - name: MT artifact > app-android > test-results
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-android-test-results
+          path: app-android/build/test-results
+      - name: MT artifact > app-android > reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-android-reports
+          path: app-android/build/reports
+      - name: MT artifact > app-android > apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-android-apk
+          path: app-android/build/outputs/apk
+      - name: MT artifact > app-android > bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-android-bundle
+          path: app-android/build/outputs/bundle
       - name: DEBUG List files in the repository
         run: |
           ls ${{ github.workspace }}
