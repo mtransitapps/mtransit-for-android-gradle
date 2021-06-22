@@ -79,8 +79,8 @@ jobs:
       #   git submodule foreach git commit -m "CI: Code Sync"
       #   git add .
       #   git git commit -m "CI: Code Sync"
-      - name: MT build & test
-        run: ./build_and_test.sh
+      - name: MT test
+        run: ./test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       # ARTIFACT > TEST RESULTS & REPORTS
