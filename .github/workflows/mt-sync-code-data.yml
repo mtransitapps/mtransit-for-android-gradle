@@ -76,6 +76,8 @@ jobs:
           path: |
             */build/reports/
             !**/*.xml
+      - name: MT commit code change
+        run: ./commit_code_change.sh
       - name: MT download & parse
         run: ./download_and_parse.sh
       - name: MT assemble release (APK & ABB)
