@@ -125,6 +125,8 @@ custom_local.properties
 # DEV files
 dev.properties
 
+# trigger change 1
+
 # Shared files
 /.idea/.name
 /.idea/bashsupport_project.xml
@@ -135,6 +137,7 @@ dev.properties
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
 /assemble_release.sh
+/commit_code_change.sh
 /build.gradle
 /build.sh
 /download_and_parse.sh
