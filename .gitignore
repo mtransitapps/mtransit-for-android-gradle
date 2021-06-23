@@ -138,6 +138,7 @@ dev.properties
 /.idea/vcs.xml
 /assemble_release.sh
 /commit_code_change.sh
+/commit_data_change.sh
 /build.gradle
 /build.sh
 /download_and_parse.sh
