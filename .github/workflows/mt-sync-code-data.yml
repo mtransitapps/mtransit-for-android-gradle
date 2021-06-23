@@ -24,9 +24,7 @@ jobs:
       - name: MT code sync
         # if: github.event_name != 'pull_request'
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-        run: |
-          git submodule foreach git checkout ${MT_GIT_BRANCH}
-          git submodule foreach git pull
+        run: ./commons/code_sync.sh
       - name: MT code setup
         run: ./commons/code_setup.sh
       - name: MT set up JDK 11
@@ -52,7 +50,7 @@ jobs:
           key: gradle-cache-${{ hashFiles('gradle_cache_key_checksum.txt') }}
           restore-keys: |
             gradle-cache-${{ hashFiles('gradle_cache_key_checksum.txt') }}
-            gradle-cache- # fallback to using the latest cache if no exact match is found
+            gradle-cache-
       - name: MT download dependencies
         run: ./download_dependencies.sh
       - name: MT test
@@ -80,6 +78,8 @@ jobs:
         run: ./commit_code_change.sh
       - name: MT download & parse
         run: ./download_and_parse.sh
+      - name: MT commit data change
+        run: ./commit_data_change.sh
       - name: MT assemble release (APK & ABB)
         run: ./assemble_release.sh
         env:
