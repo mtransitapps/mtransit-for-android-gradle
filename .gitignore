@@ -150,5 +150,6 @@ dev.properties
 /gradlew
 /gradlew.bat
 /init_cache_key.sh
+/push_commits.sh
 /settings.gradle
 /test.sh

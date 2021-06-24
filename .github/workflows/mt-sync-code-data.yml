@@ -91,6 +91,8 @@ jobs:
           path: |
             app-android/build/outputs/apk
             app-android/build/outputs/bundle
+      - name: MT push commits
+        run: ./push_commits.sh
       - name: DEBUG GIT STATUS
         run: |
           git status -sb
