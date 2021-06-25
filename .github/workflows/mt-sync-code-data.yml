@@ -1,11 +1,16 @@
 name: MT SYNC CODE & DATA # download & parse
-on: workflow_dispatch # manual
-# on:
+on:
+  workflow_dispatch: # manual
 #   schedule:  TODO
 #     cron: 0 0 * * 1 # 0 0 * * MON # WEEKLY
 #     # cron: 0 0 * * 1,4 # 0 0 * * MON,THU #BI-WEEKLY
 # gh workflow run mt-sync-code-data.yml --ref mmathieum
 # gh run list --workflow=mt-sync-code-data.yml
+env:
+  MT_ORG_GIT_COMMIT_ON: ${{ secrets.MT_ORG_GIT_COMMIT_ON }}
+  MT_ORG_GIT_COMMIT_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_OFF }}
+  MT_GIT_COMMIT_ON: ${{ secrets.MT_GIT_COMMIT_ON }}
+  MT_GIT_COMMIT_OFF: ${{ secrets.MT_GIT_COMMIT_OFF }}
 jobs:
   MT-SYNC-CODE-DATA-JOB:
     runs-on: ubuntu-latest
@@ -20,7 +25,13 @@ jobs:
       - name: MT setup MT_GIT_BRANCH env
         if: github.event_name != 'pull_request'
         run: |
-           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      # - name: MT setup env
+      #   run: |
+      #     echo "MT_ORG_GIT_COMMIT_ON=${{ secrets.MT_ORG_GIT_COMMIT_ON }}" >> $GITHUB_ENV
+      #     echo "MT_ORG_GIT_COMMIT_OFF=${{ secrets.MT_ORG_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
+      #     echo "MT_GIT_COMMIT_ON=${{ secrets.MT_GIT_COMMIT_ON }}" >> $GITHUB_ENV
+      #     echo "MT_GIT_COMMIT_OFF=${{ secrets.MT_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
       - name: MT code sync
         # if: github.event_name != 'pull_request'
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
