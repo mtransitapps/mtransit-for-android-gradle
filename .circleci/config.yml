@@ -3,8 +3,14 @@ version: 2.1
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/android
   android: circleci/android@1.0.3
+workflows:
+  workflow:
+    jobs:
+      - job:
+          context:
+            - MT_shared_context
 jobs:
-  build:
+  job:
     working_directory: ~/mtransit
     docker:
       - image: circleci/android:api-30
