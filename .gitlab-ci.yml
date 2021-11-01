@@ -1,9 +1,9 @@
 image: openjdk:11-jdk
 
 variables:
-  ANDROID_COMPILE_SDK: "30"
-  ANDROID_BUILD_TOOLS: "30.0.3"
-  ANDROID_SDK_TOOLS_VERSION:   "7302050" # https://developer.android.com/studio/#command-tools
+  ANDROID_COMPILE_SDK: "31"
+  ANDROID_BUILD_TOOLS: "31.0.0"
+  ANDROID_SDK_TOOLS_VERSION: "7583922" # https://developer.android.com/studio/#command-tools
   CACHE_KEY: 'gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-gradle-cache-{{ checksum "gradle_cache_key_checksum.txt" }}'
 
 before_script:
