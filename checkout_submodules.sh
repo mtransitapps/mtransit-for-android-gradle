@@ -7,7 +7,7 @@ echo "GITHUB_ACTIONS: $GITHUB_ACTIONS";
 IS_SHALLOW=$(git rev-parse --is-shallow-repository);
 if [[ "$IS_SHALLOW" == true && "$GITHUB_ACTIONS" == false ]]; then
 	echo "> Fetching un-shallow GIT repo...";
-	git fetch --unshallow;
+	git fetch -v --unshallow;
 	RESULT=$?;
 	if [[ ${RESULT} -ne 0 ]]; then
 		echo "> Error while fetching un-shallow GIT repository!";
