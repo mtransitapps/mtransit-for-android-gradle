@@ -1,4 +1,4 @@
-name: MT SYNC CODE & DATA # download & parse
+name: MT sync code & data # download & parse
 on:
   workflow_dispatch: # manual
 #   schedule:  TODO
@@ -6,6 +6,7 @@ on:
 #     # cron: 0 0 * * 1,4 # 0 0 * * MON,THU #BI-WEEKLY
 # gh workflow run mt-sync-code-data.yml --ref mmathieum
 # gh run list --workflow=mt-sync-code-data.yml
+# gh run watch ; gh browse --branch mmathieum
 env:
   MT_ORG_GIT_COMMIT_ON: ${{ secrets.MT_ORG_GIT_COMMIT_ON }}
   MT_ORG_GIT_COMMIT_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_OFF }}
