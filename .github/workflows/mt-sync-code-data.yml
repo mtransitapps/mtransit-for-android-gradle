@@ -8,10 +8,31 @@ on:
 # gh run list --workflow=mt-sync-code-data.yml
 # gh run watch ; gh browse --branch mmathieum
 env:
+  # git commit & push
   MT_ORG_GIT_COMMIT_ON: ${{ secrets.MT_ORG_GIT_COMMIT_ON }}
   MT_ORG_GIT_COMMIT_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_OFF }}
   MT_GIT_COMMIT_ON: ${{ secrets.MT_GIT_COMMIT_ON }}
   MT_GIT_COMMIT_OFF: ${{ secrets.MT_GIT_COMMIT_OFF }}
+  # push to store
+  MT_ORG_PUSH_STORE_ON: ${{ secrets.MT_ORG_PUSH_STORE_ON }}
+  MT_ORG_PUSH_STORE_OFF: ${{ secrets.MT_ORG_PUSH_STORE_OFF }}
+  MT_PUSH_STORE_ON: ${{ secrets.MT_PUSH_STORE_ON }}
+  MT_PUSH_STORE_OFF: ${{ secrets.MT_PUSH_STORE_OFF }}
+  # push to store > alpha
+  MT_ORG_STORE_ALPHA_ON: ${{ secrets.MT_ORG_STORE_ALPHA_ON }}
+  MT_ORG_STORE_ALPHA_OFF: ${{ secrets.MT_ORG_STORE_ALPHA_OFF }}
+  MT_STORE_ALPHA_ON: ${{ secrets.MT_STORE_ALPHA_ON }}
+  MT_STORE_ALPHA_OFF: ${{ secrets.MT_STORE_ALPHA_OFF }}
+  # push to store > private beta
+  MT_ORG_STORE_BETA_PRIVATE_ON: ${{ secrets.MT_ORG_STORE_BETA_PRIVATE_ON }}
+  MT_ORG_STORE_BETA_PRIVATE_OFF: ${{ secrets.MT_ORG_STORE_BETA_PRIVATE_OFF }}
+  MT_STORE_BETA_PRIVATE_ON: ${{ secrets.MT_STORE_BETA_PRIVATE_ON }}
+  MT_STORE_BETA_PRIVATE_OFF: ${{ secrets.MT_STORE_BETA_PRIVATE_OFF }}
+  # push to store > production
+  MT_ORG_STORE_PRODUCTION_ON: ${{ secrets.MT_ORG_STORE_PRODUCTION_ON }}
+  MT_ORG_STORE_PRODUCTION_OFF: ${{ secrets.MT_ORG_STORE_PRODUCTION_OFF }}
+  MT_STORE_PRODUCTION_ON: ${{ secrets.MT_STORE_PRODUCTION_ON }}
+  MT_STORE_PRODUCTION_OFF: ${{ secrets.MT_STORE_PRODUCTION_OFF }}
 jobs:
   MT-SYNC-CODE-DATA-JOB:
     runs-on: ubuntu-latest
@@ -108,8 +129,14 @@ jobs:
           path: |
             app-android/build/outputs/apk
             app-android/build/outputs/bundle
+      - name: MT set app release required (or not)
+        run: ./set_app_release_required.sh
       - name: MT push commits
         run: ./push_commits.sh
+      - name: MT Publish release (?)
+        run: ./publish_app_release.sh
+        env:
+          MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: DEBUG GIT STATUS
         run: |
           git status -sb

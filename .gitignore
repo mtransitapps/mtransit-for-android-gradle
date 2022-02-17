@@ -123,6 +123,7 @@ fastlane/readme.md
 # MT files
 keys.properties
 custom_local.properties
+.mt/*
 
 # DEV files
 dev.properties
@@ -152,6 +153,8 @@ dev.properties
 /gradlew
 /gradlew.bat
 /init_cache_key.sh
+/publish_app_release.sh
 /push_commits.sh
+/set_app_release_required.sh
 /settings.gradle
 /test.sh
