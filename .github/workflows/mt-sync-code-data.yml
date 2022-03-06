@@ -1,9 +1,9 @@
 name: MT sync code & data # download & parse
 on:
   workflow_dispatch: # manual
-#   schedule:  TODO
-#     cron: 0 0 * * 1 # 0 0 * * MON # WEEKLY
-#     # cron: 0 0 * * 1,4 # 0 0 * * MON,THU #BI-WEEKLY
+  schedule:
+    - cron: '0 6 * * 2' # Tuesdays @ 6am # WEEKLY https://crontab.guru/#0_6_*_*_2
+#   - cron: '0 6 * * 1,4' # 0 0 * * MON,THU #BI-WEEKLY https://crontab.guru/#0_6_*_*_1,4
 # gh workflow run mt-sync-code-data.yml --ref mmathieum
 # gh run list --workflow=mt-sync-code-data.yml
 # gh run watch ; gh browse --branch mmathieum
@@ -40,6 +40,7 @@ jobs:
       - name: MT check out main repository code (no submodules)
         uses: actions/checkout@v2
         with:
+          ref: mmathieum
           submodules: true # required to set right token
           token: ${{ secrets.MT_PAT }}
           fetch-depth: 0 # fetch all (not required util release build)
