@@ -2,8 +2,8 @@ name: MT sync code & data # download & parse
 on:
   workflow_dispatch: # manual
   schedule:
-    - cron: '0 6 * * 2' # Tuesdays @ 6am # WEEKLY https://crontab.guru/#0_6_*_*_2
-#   - cron: '0 6 * * 1,4' # 0 0 * * MON,THU #BI-WEEKLY https://crontab.guru/#0_6_*_*_1,4
+    - cron: '0 12 * * 2' # Tuesdays @ 12pm UTC # WEEKLY https://crontab.guru/#0_12_*_*_2
+#   - cron: '0 12 * * 1,4' # 0 0 * * MON,THU #BI-WEEKLY https://crontab.guru/#0_12_*_*_1,4
 # gh workflow run mt-sync-code-data.yml --ref mmathieum
 # gh run list --workflow=mt-sync-code-data.yml
 # gh run watch ; gh browse --branch mmathieum
