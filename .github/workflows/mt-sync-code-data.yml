@@ -71,6 +71,8 @@ jobs:
         with:
           distribution: 'adopt-hotspot' # 'adopt'
           java-version: '11'
+      - name: MT Gradle wrapper validation
+        uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
         uses: actions/cache@v2
         with:
@@ -98,7 +100,7 @@ jobs:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: MT artifact > unit tests XML results
         uses: actions/upload-artifact@v2
-        if: ${{ always() }} # evern if tests fails
+        if: ${{ always() }} # even if tests fails
         with:
           name: unit-test-xml-results
           path: |
@@ -107,7 +109,7 @@ jobs:
             */build/reports/*.xml
       - name: MT artifact > HTML reports
         uses: actions/upload-artifact@v2
-        if: ${{ always() }} # evern if tests fails
+        if: ${{ always() }} # even if tests fails
         with:
           name: html-reports
           path: |
