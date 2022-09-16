@@ -2,7 +2,7 @@
 version: 2.1
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/android
-  android: circleci/android@1.0.3
+  android: circleci/android@2.1.2
 workflows:
   workflow:
     jobs:
@@ -16,7 +16,7 @@ jobs:
       # https://circleci.com/developer/images/image/cimg/android
       # https://github.com/CircleCI-Public/cimg-android
       # https://hub.docker.com/r/cimg/android/tags
-      - image: cimg/android:2021.10.2
+      - image: cimg/android:2022.09.2
         auth:
           username: montransit
           password: $MT_DOCKER_PASSWORD
@@ -37,7 +37,7 @@ jobs:
       - android/accept-licenses
       - run:
           name: Update SDK
-          command: echo y | sdkmanager "build-tools;32.0.0" "platform-tools" "platforms;android-32"
+          command: echo y | sdkmanager "build-tools;33.0.0" "platform-tools" "platforms;android-33"
       - checkout
       - run:
           name: checkout_submodules.sh permissions
