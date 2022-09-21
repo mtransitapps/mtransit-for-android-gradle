@@ -2,7 +2,7 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
 #NO DEPENDENCY <= EXECUTED BEFORE GIT SUBMODULE
 
-echo "GITHUB_ACTIONS: $GITHUB_ACTIONS";
+echo "> GitHub Actions: $GITHUB_ACTIONS.";
 
 IS_SHALLOW=$(git rev-parse --is-shallow-repository);
 if [[ "$IS_SHALLOW" == true && "$GITHUB_ACTIONS" == false ]]; then
