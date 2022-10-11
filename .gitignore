@@ -139,6 +139,7 @@ dev.properties
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
+/.vscode/settings.json
 /assemble_release.sh
 /commit_code_change.sh
 /commit_data_change.sh
