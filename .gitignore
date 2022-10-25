@@ -145,6 +145,8 @@ dev.properties
 /commit_data_change.sh
 /build.gradle
 /build.sh
+/dependency_update_apply.sh
+/dependency_update_check.sh
 /download_and_parse.sh
 /download_dependencies.sh
 /gitall.sh
