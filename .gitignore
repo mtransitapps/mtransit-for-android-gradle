@@ -147,6 +147,8 @@ dev.properties
 /build.sh
 /dependency_update_apply.sh
 /dependency_update_check.sh
+/dependency_update_commit_code_change.sh
+/dependency_update_push_commits.sh
 /download_and_parse.sh
 /download_dependencies.sh
 /gitall.sh
