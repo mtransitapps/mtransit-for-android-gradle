@@ -27,6 +27,9 @@ jobs:
   MT-DEPENDENCY-UPDATE-JOB:
     runs-on: ubuntu-latest
     steps:
+      - name: MT pull request fail
+        if: github.event_name == 'pull_request'
+        run: exit 1000
       - name: MT check out main repository code (no submodules)
         uses: actions/checkout@v2
         with:
@@ -40,12 +43,6 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      # - name: MT setup env
-      #   run: |
-      #     echo "MT_ORG_GIT_COMMIT_ON=${{ secrets.MT_ORG_GIT_COMMIT_ON }}" >> $GITHUB_ENV
-      #     echo "MT_ORG_GIT_COMMIT_OFF=${{ secrets.MT_ORG_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
-      #     echo "MT_GIT_COMMIT_ON=${{ secrets.MT_GIT_COMMIT_ON }}" >> $GITHUB_ENV
-      #     echo "MT_GIT_COMMIT_OFF=${{ secrets.MT_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
       - name: MT add parser repo
         uses: actions/checkout@v3
         with:
@@ -55,7 +52,6 @@ jobs:
           token: ${{ secrets.MT_PAT }}
           fetch-depth: 0 # fetch all (not required util release build)
       - name: MT code sync
-        # if: github.event_name != 'pull_request'
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: ./commons/code_sync.sh
       - name: MT code setup
@@ -112,7 +108,7 @@ jobs:
       - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
         name: MT artifact > unit tests XML results
         uses: actions/upload-artifact@v2
-        if: ${{ always() }} # even if tests fails
+        # if: ${{ always() }} # even if tests fails
         with:
           name: dependency-update-xml-results
           path: |
@@ -120,7 +116,7 @@ jobs:
       - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
         name: MT artifact > HTML reports
         uses: actions/upload-artifact@v2
-        if: ${{ always() }} # even if tests fails
+        # if: ${{ always() }} # even if tests fails
         with:
           name: html-dependency-update-reports
           path: |
