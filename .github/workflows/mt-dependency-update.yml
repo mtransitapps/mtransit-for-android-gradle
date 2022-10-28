@@ -1,6 +1,7 @@
 name: MT dependency update
 # TODO:
 # - run on main app + module OR clone parser + add dependency to build.gradle so all dependency are chedked
+# - rm -rf parser directory
 # - use different env variable to block/allow git commit/push
 # - ...
 # - test manually 1st
@@ -8,8 +9,7 @@ on:
   workflow_dispatch: # manual
   pull_request: # TO BE DELETED
 #  schedule:
-#    - cron: '0 12 * * 2' # Tuesdays @ 12pm UTC # WEEKLY https://crontab.guru/#0_12_*_*_2
-#   - cron: '0 12 * * 1,4' # 0 0 * * MON,THU #BI-WEEKLY https://crontab.guru/#0_12_*_*_1,4
+#   - cron: '0 12 * * 3' # Wednesdays @ 12pm UTC # WEEKLY https://crontab.guru/#0_12_*_*_3
 # gh workflow run mt-dependency-update.yml --ref mmathieum
 # gh run list --workflow=mt-dependency-update.yml
 # gh run watch ; gh browse --branch mmathieum
@@ -22,7 +22,11 @@ env:
   MT_ORG_GIT_COMMIT_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_OFF }}
   MT_GIT_COMMIT_ON: ${{ secrets.MT_GIT_COMMIT_ON }}
   MT_GIT_COMMIT_OFF: ${{ secrets.MT_GIT_COMMIT_OFF }}
-  # MT_DEPENDENCY_UPDATE: "true"
+  # git commit & push > dependency update ONLY
+  MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_ON: ${{ secrets.MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_ON }}
+  MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_OFF }}
+  MT_GIT_COMMIT_DEPENDENCY_UPDATE_ON: ${{ secrets.MT_GIT_COMMIT_DEPENDENCY_UPDATE_ON }}
+  MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF: ${{ secrets.MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF }}
 jobs:
   MT-DEPENDENCY-UPDATE-JOB:
     runs-on: ubuntu-latest
@@ -31,7 +35,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: exit 1000
       - name: MT check out main repository code (no submodules)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: mmathieum
           submodules: true # required to set right token
@@ -64,7 +68,7 @@ jobs:
       - name: MT Gradle wrapper validation
         uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/wrapper
@@ -74,7 +78,7 @@ jobs:
       - name: MT Gradle cache > Generate key
         run: ./init_cache_key.sh
       - name: MT cache > Gradle cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -84,12 +88,12 @@ jobs:
             gradle-cache-
       - name: MT dependency update check
         run: ./dependency_update_check.sh
-      - name: MT dependency update set update available
+      - name: MT dependency update update available
         id: mt_dependency_update_available
         uses: andstor/file-existence-action@v2
         with:
           files: "commons/gradle.libs.versions.updates.toml"
-      - name: MT ...
+      - name: MT dependency update update available env variable
         if: steps.mt_dependency_update_available.outputs.files_exists == 'true'
         run: |
           echo "MT_DEPENDENCY_UPDATE_AVAILABLE=true" >> $GITHUB_ENV
@@ -105,22 +109,23 @@ jobs:
         run: ./test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
-      - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
+      - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > unit tests XML results
         uses: actions/upload-artifact@v2
-        # if: ${{ always() }} # even if tests fails
         with:
           name: dependency-update-xml-results
           path: |
             build/dependencyUpdates/report.xml
-      - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
+      - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > HTML reports
         uses: actions/upload-artifact@v2
-        # if: ${{ always() }} # even if tests fails
         with:
           name: html-dependency-update-reports
           path: |
             build/dependencyUpdates/report.html
+      - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
+        name: MT remove parser repo
+        run: rm -rf parser
       - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
         name: MT dependency update commit code change
         run: ./dependency_update_commit_code_change.sh
