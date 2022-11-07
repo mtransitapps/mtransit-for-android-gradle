@@ -61,7 +61,7 @@ jobs:
       - name: MT code setup
         run: ./commons/code_setup.sh
       - name: MT set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt-hotspot' # 'adopt'
           java-version: '11'
@@ -111,14 +111,14 @@ jobs:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > unit tests XML results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dependency-update-xml-results
           path: |
             build/dependencyUpdates/report.xml
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > HTML reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: html-dependency-update-reports
           path: |
