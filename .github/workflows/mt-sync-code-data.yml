@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: MT check out main repository code (no submodules)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: mmathieum
           submodules: true # required to set right token
@@ -70,14 +70,14 @@ jobs:
       #     git push -v
       #     git submodule foreach git push -v
       - name: MT set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt-hotspot' # 'adopt'
           java-version: '11'
       - name: MT Gradle wrapper validation
         uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/wrapper
@@ -87,7 +87,7 @@ jobs:
       - name: MT Gradle cache > Generate key
         run: ./init_cache_key.sh
       - name: MT cache > Gradle cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -102,7 +102,7 @@ jobs:
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: MT artifact > unit tests XML results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: ${{ always() }} # even if tests fails
         with:
           name: unit-test-xml-results
@@ -111,7 +111,7 @@ jobs:
             */build/test-results/*.xml
             */build/reports/*.xml
       - name: MT artifact > HTML reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: ${{ always() }} # even if tests fails
         with:
           name: html-reports
@@ -122,6 +122,14 @@ jobs:
         run: ./commit_code_change.sh
       - name: MT download & parse
         run: ./download_and_parse.sh
+      - name: MT artifact > GTFS validator results
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }} # even if tests fails
+        with:
+          name: gtfs-validator-results
+          path: |
+            agency-parser/output/current/
+            agency-parser/output/next/
       - name: MT commit data change
         run: ./commit_data_change.sh
       - name: MT assemble release (APK & ABB)
@@ -129,7 +137,7 @@ jobs:
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: MT artifact > app-android > APK & ABB
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-android-apk-bundle
           path: |
