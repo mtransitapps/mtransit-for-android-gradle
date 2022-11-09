@@ -84,6 +84,12 @@ jobs:
       # - android/save-gradle-cache:
       # cache-prefix: gradle-cache
       - store_artifacts:
+          path: agency-parser/output/current
+          destination: gtfs-validator-results-current
+      - store_artifacts:
+          path: agency-parser/output/next
+          destination: gtfs-validator-results-next
+      - store_artifacts:
           path: app-android/build/reports
           destination: reports
       - store_artifacts:
