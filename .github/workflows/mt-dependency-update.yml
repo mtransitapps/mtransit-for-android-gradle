@@ -12,7 +12,7 @@ on:
 #   - cron: '0 12 * * 3' # Wednesdays @ 12pm UTC # WEEKLY https://crontab.guru/#0_12_*_*_3
 # gh workflow run mt-dependency-update.yml --ref mmathieum
 # gh run list --workflow=mt-dependency-update.yml
-# gh run watch ; gh browse --branch mmathieum
+# gh run watch ; gh browse --repo mtransitapps/commons --branch mmathieum
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
