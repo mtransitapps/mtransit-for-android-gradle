@@ -16,7 +16,7 @@ jobs:
       # https://circleci.com/developer/images/image/cimg/android
       # https://github.com/CircleCI-Public/cimg-android
       # https://hub.docker.com/r/cimg/android/tags
-      - image: cimg/android:2022.09.2
+      - image: cimg/android:2022.12.1
         auth:
           username: montransit
           password: $MT_DOCKER_PASSWORD
