@@ -63,12 +63,34 @@ jobs:
         run: ./test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
-      - name: MT download & parse
-        run: ./download_and_parse.sh
+      - name: MT artifact > unit tests XML results
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }} # even if tests fails
+        with:
+          name: unit-test-xml-results
+          path: |
+            */build/test-results/**/*.xml
+            */build/test-results/*.xml
+            */build/reports/*.xml
+      - name: MT artifact > HTML reports
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }} # even if tests fails
+        with:
+          name: html-reports
+          path: |
+            */build/reports/
+            !**/*.xml
       - name: MT assemble release (APK & ABB)
         run: ./assemble_release.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
+      - name: MT artifact > app-android > APK & ABB
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-android-apk-bundle
+          path: |
+            app-android/build/outputs/apk
+            app-android/build/outputs/bundle
       - name: DEBUG GIT STATUS
         run: |
           git status -sb
