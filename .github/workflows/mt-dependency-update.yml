@@ -1,7 +1,5 @@
 name: MT dependency update
 # TODO:
-# - run on main app + module OR clone parser + add dependency to build.gradle so all dependency are chedked
-# - rm -rf parser directory
 # - use different env variable to block/allow git commit/push
 # - ...
 # - test manually 1st
@@ -110,14 +108,14 @@ jobs:
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
-        name: MT artifact > unit tests XML results
+        name: MT artifact > dependency update XML report
         uses: actions/upload-artifact@v3
         with:
           name: dependency-update-xml-results
           path: |
             build/dependencyUpdates/report.xml
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
-        name: MT artifact > HTML reports
+        name: MT artifact > dependency update HTML report
         uses: actions/upload-artifact@v3
         with:
           name: html-dependency-update-reports
@@ -129,9 +127,6 @@ jobs:
       - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
         name: MT dependency update commit code change
         run: ./dependency_update_commit_code_change.sh
-      - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
-        name: MT download & parse
-        run: ./download_and_parse.sh
       - if: env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true'
         name: MT assemble release (APK & ABB)
         run: ./assemble_release.sh

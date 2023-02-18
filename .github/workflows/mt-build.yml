@@ -14,17 +14,6 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.head_ref }}
   cancel-in-progress: true
-#env:
-#  # git commit & push
-#  MT_ORG_GIT_COMMIT_ON: ${{ secrets.MT_ORG_GIT_COMMIT_ON }}
-#  MT_ORG_GIT_COMMIT_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_OFF }}
-#  MT_GIT_COMMIT_ON: ${{ secrets.MT_GIT_COMMIT_ON }}
-#  MT_GIT_COMMIT_OFF: ${{ secrets.MT_GIT_COMMIT_OFF }}
-#  # git commit & push > dependency update ONLY
-#  MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_ON: ${{ secrets.MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_ON }}
-#  MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_OFF: ${{ secrets.MT_ORG_GIT_COMMIT_DEPENDENCY_UPDATE_OFF }}
-#  MT_GIT_COMMIT_DEPENDENCY_UPDATE_ON: ${{ secrets.MT_GIT_COMMIT_DEPENDENCY_UPDATE_ON }}
-#  MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF: ${{ secrets.MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF }}
 jobs:
   MT-BUILD-JOB:
     runs-on: ubuntu-latest
@@ -40,9 +29,6 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      - name: MT code sync
-        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-        run: ./commons/code_sync.sh
       - name: MT code setup
         run: ./commons/code_setup.sh
       - name: MT set up JDK 11
@@ -77,18 +63,6 @@ jobs:
         run: ./test.sh
         env:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
-      - name: MT artifact > unit tests XML results
-        uses: actions/upload-artifact@v3
-        with:
-          name: dependency-update-xml-results
-          path: |
-            build/dependencyUpdates/report.xml
-      - name: MT artifact > HTML reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: html-dependency-update-reports
-          path: |
-            build/dependencyUpdates/report.html
       - name: MT download & parse
         run: ./download_and_parse.sh
       - name: MT assemble release (APK & ABB)
