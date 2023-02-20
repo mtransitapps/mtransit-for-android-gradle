@@ -1,7 +1,7 @@
 ---
 name: Modules list
 about: List of supported modules
-title: ''
+title: 'Issue requiring changes in all modules'
 labels: MT
 assignees: mmathieum
 
@@ -79,7 +79,7 @@ assignees: mmathieum
 - [ ] ca-red-deer-transit-bus
 - [ ] ca-regina-transit-bus
 - [ ] ca-richelieu-citvr-bus
-- [ ] ca-roussillon-citro- [ ] us-bus
+- [ ] ca-roussillon-citrous-bus
 - [ ] ca-saint-john-transit-bus
 - [ ] ca-saskatoon-transit-bus
 - [ ] ca-shawinigan-rtcs-bus
@@ -90,7 +90,7 @@ assignees: mmathieum
 - [ ] ca-st-albert-transit-bus
 - [ ] ca-st-catharines-transit-bus
 - [ ] ca-ste-julie-omitsju-bus
-- [ ] ca-st-john-s-metrob- [ ] us-transit-bus
+- [ ] ca-st-john-s-metrobus-transit-bus
 - [ ] ca-strathcona-county-transit-bus
 - [ ] ca-sudbury-transit-bus
 - [ ] ca-sud-ouest-citso-bus
