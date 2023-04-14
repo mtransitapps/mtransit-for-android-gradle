@@ -58,11 +58,11 @@ jobs:
         run: ./commons/code_sync.sh
       - name: MT code setup
         run: ./commons/code_setup.sh
-      - name: MT set up JDK 11
+      - name: MT set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt-hotspot' # 'adopt'
-          java-version: '11'
+          distribution: 'temurin'
+          java-version: '17'
       - name: MT Gradle wrapper validation
         uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
