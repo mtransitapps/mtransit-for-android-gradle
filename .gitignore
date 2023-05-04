@@ -141,6 +141,7 @@ dev.properties
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/dictionaries
 /.idea/inspectionProfiles/Project_Default.xml
+/.idea/kotlinc.xml
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
 /.vscode/settings.json
