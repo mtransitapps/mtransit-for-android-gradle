@@ -53,22 +53,12 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      # - name: MT setup env
-      #   run: |
-      #     echo "MT_ORG_GIT_COMMIT_ON=${{ secrets.MT_ORG_GIT_COMMIT_ON }}" >> $GITHUB_ENV
-      #     echo "MT_ORG_GIT_COMMIT_OFF=${{ secrets.MT_ORG_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
-      #     echo "MT_GIT_COMMIT_ON=${{ secrets.MT_GIT_COMMIT_ON }}" >> $GITHUB_ENV
-      #     echo "MT_GIT_COMMIT_OFF=${{ secrets.MT_GIT_COMMIT_OFF }}" >> $GITHUB_ENV
       - name: MT code sync
         # if: github.event_name != 'pull_request'
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: ./commons/code_sync.sh
       - name: MT code setup
         run: ./commons/code_setup.sh
-      # - name: DEBUG GIT PUSH
-      #   run: |
-      #     git push -v
-      #     git submodule foreach git push -v
       - name: MT set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -159,11 +149,5 @@ jobs:
       - name: MT Publish release (?)
         run: ./publish_app_release.sh
         env:
+          GITHUB_TOKEN: ${{ secrets.MT_PAT }}
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
-      - name: DEBUG GIT STATUS
-        run: |
-          git status -sb
-          git submodule foreach git status -sb
-      - name: DEBUG LIST FILES
-        run: |
-          ls ${{ github.workspace }}
