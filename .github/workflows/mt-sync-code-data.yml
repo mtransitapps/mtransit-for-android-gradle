@@ -38,6 +38,7 @@ env:
   MT_STORE_PRODUCTION_OFF: ${{ secrets.MT_STORE_PRODUCTION_OFF }}
 jobs:
   MT-SYNC-CODE-DATA-JOB:
+    name: "MT Sync Code & Data"
     runs-on: ubuntu-latest
     steps:
       - name: MT check out main repository code (no submodules)
@@ -64,8 +65,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: MT Gradle wrapper validation
-        uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
         uses: actions/cache@v3
         with:

@@ -27,6 +27,7 @@ env:
   MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF: ${{ secrets.MT_GIT_COMMIT_DEPENDENCY_UPDATE_OFF }}
 jobs:
   MT-DEPENDENCY-UPDATE-JOB:
+    name: "MT Dependency update"
     runs-on: ubuntu-latest
     steps:
       - name: MT pull request fail
@@ -63,8 +64,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: MT Gradle wrapper validation
-        uses: gradle/wrapper-validation-action@v1
       - name: MT cache > Gradle wrapper
         uses: actions/cache@v3
         with:
