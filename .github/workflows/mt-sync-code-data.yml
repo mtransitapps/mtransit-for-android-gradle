@@ -133,6 +133,7 @@ jobs:
       - name: MT assemble release (APK & ABB)
         run: ./assemble_release.sh
         env:
+          GITHUB_TOKEN: ${{ secrets.MT_PAT }}
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - name: MT artifact > app-android > APK & ABB
         uses: actions/upload-artifact@v3
