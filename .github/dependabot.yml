@@ -2,6 +2,8 @@ version: 2
 updates:
   # GitHub Actions in /.github/workflows/ # TODO exclude mt-sync-code-data.yml (already setup in commons repo)
   - package-ecosystem: "github-actions"
-    directory: "/" # == "/.github/workflows/"
+    # "/" == "/.github/workflows/"
+    directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "mmathieum"
