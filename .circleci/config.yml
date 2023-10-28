@@ -20,12 +20,16 @@ jobs:
         auth:
           username: montransit
           password: $MT_DOCKER_PASSWORD
+    # https://circleci.com/docs/configuration-reference/#x86
     # resource_class: medium # small, medium (default), medium+, large, xlarge
+    # resource_class: medium # (vCPU: 2 | RAM: 4GB) (DEFAULT)
+    resource_class: medium+ # (vCPU: 3 | RAM: 6GB)
+    # resource_class: large # (vCPU: 4 | RAM: 8GB) (large is maxiumum for free plan)
     environment: # https://circleci.com/docs/2.0/java-oom/ (-XX:MaxRAMPercentage=90.0 )
-      JAVA_TOOL_OPTIONS: -Xmx3333m
-      JVM_OPTS: -Xmx3333m
-      JAVA_OPTS: -Xmx3333m -Dorg.gradle.jvmargs="-Xms1g -Xmx3333m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-      GRADLE_OPTS: -Xmx3333m -Dorg.gradle.jvmargs="-Xms1g -Xmx3333m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      JAVA_TOOL_OPTIONS: -Xmx5432m
+      JVM_OPTS: -Xmx5432m
+      JAVA_OPTS: -Xmx5432m -Dorg.gradle.jvmargs="-Xms1g -Xmx5432m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      GRADLE_OPTS: -Xmx5432m -Dorg.gradle.jvmargs="-Xms1g -Xmx5432m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
       TERM: xterm-256color
       TZ: "America/Toronto"
     steps:
