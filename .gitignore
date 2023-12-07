@@ -101,6 +101,12 @@ fabric.properties
 .idea/assetWizardSettings.xml
 # Rendered experimental
 .idea/render.experimental.xml
+# App Insights
+.idea/appInsightsSettings.xml
+# Deployment target drop down
+.idea/deploymentTargetDropDown.xml
+# Project migrations
+.idea/migrations.xml
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
