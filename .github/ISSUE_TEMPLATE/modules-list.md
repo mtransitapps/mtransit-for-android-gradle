@@ -62,6 +62,7 @@ assignees: mmathieum
 - [ ] ca-moncton-codiac-transpo-bus
 - [ ] ca-montreal-amt-train
 - [ ] ca-montreal-bixi-bike
+- [ ] ca-montreal-rem-light-rail-android
 - [ ] ca-montreal-stm-bus
 - [ ] ca-montreal-stm-subway
 - [ ] ca-nanaimo-rdn-transit-system-bus
@@ -79,7 +80,6 @@ assignees: mmathieum
 - [ ] ca-red-deer-transit-bus
 - [ ] ca-regina-transit-bus
 - [ ] ca-richelieu-citvr-bus
-- [ ] ca-roussillon-citrous-bus
 - [ ] ca-saint-john-transit-bus
 - [ ] ca-saskatoon-transit-bus
 - [ ] ca-shawinigan-rtcs-bus
