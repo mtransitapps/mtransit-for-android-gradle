@@ -7,3 +7,4 @@ updates:
     schedule:
       interval: "weekly"
     target-branch: "mmathieum"
+    open-pull-requests-limit: 7
