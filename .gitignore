@@ -151,6 +151,8 @@ dev.properties
 /.idea/runConfigurations.xml
 /.idea/vcs.xml
 /.vscode/settings.json
+/app_install_debug.sh
+/app_install_release.sh
 /assemble_release.sh
 /commit_code_change.sh
 /commit_data_change.sh
