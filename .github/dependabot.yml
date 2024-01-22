@@ -1,10 +1,14 @@
 version: 2
 updates:
-  # GitHub Actions in /.github/workflows/ # TODO exclude mt-sync-code-data.yml (already setup in commons repo)
+  # GitHub Actions in /.github/workflows/
   - package-ecosystem: "github-actions"
     # "/" == "/.github/workflows/"
     directory: "/"
     schedule:
       interval: "weekly"
     target-branch: "mmathieum"
+    groups:
+      gh-actions:
+        patterns:
+          - "actions/*"
     open-pull-requests-limit: 7
