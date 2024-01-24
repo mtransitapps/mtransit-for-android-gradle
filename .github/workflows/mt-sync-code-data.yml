@@ -63,7 +63,7 @@ jobs:
       - name: MT set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '17'
       - name: MT cache > Gradle wrapper
         uses: actions/cache@v4
