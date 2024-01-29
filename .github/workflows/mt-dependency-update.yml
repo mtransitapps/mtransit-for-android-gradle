@@ -87,7 +87,7 @@ jobs:
         run: ./dependency_update_check.sh
       - name: MT dependency update update available
         id: mt_dependency_update_available
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "commons/gradle/libs.versions.updates.toml"
       - name: MT dependency update update available env variable
