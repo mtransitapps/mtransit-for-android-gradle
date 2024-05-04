@@ -145,6 +145,7 @@ dev.properties
 /.idea/bashsupport_project.xml
 /.idea/codeStyles/Project.xml
 /.idea/codeStyles/codeStyleConfig.xml
+/.idea/deploymentTargetSelector.xml
 /.idea/dictionaries
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/kotlinc.xml
