@@ -1,30 +1,35 @@
 # ORIGINAL FILE: https://github.com/mtransitapps/commons/tree/master/shared-overwrite
+# https://circleci.com/docs/android-images-support-policy/
+# https://discuss.circleci.com/t/android-image-deprecations-and-eol-for-2024/50180
 version: 2.1
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/android
-  android: circleci/android@2.3.0
+  android: circleci/android@2.5.0
 workflows:
-  workflow:
+  mt-workflow:
     jobs:
-      - job:
+      - mt-job:
           context:
             - MT_shared_context
 jobs:
-  job:
+  mt-job:
     working_directory: ~/mtransit
-    docker:
-      # https://circleci.com/developer/images/image/cimg/android
-      # https://github.com/CircleCI-Public/cimg-android
-      # https://hub.docker.com/r/cimg/android/tags
-      - image: cimg/android:2023.09.1
-        auth:
-          username: montransit
-          password: $MT_DOCKER_PASSWORD
-    # https://circleci.com/docs/configuration-reference/#x86
-    # resource_class: medium # small, medium (default), medium+, large, xlarge
-    # resource_class: medium # (vCPU: 2 | RAM: 4GB) (DEFAULT)
-    resource_class: medium+ # (vCPU: 3 | RAM: 6GB)
-    # resource_class: large # (vCPU: 4 | RAM: 8GB) (large is maxiumum for free plan)
+    # docker:
+    #   # https://circleci.com/developer/images/image/cimg/android
+    #   # https://github.com/CircleCI-Public/cimg-android
+    #   # https://hub.docker.com/r/cimg/android/tags
+    #   - image: cimg/android:2023.09.1
+    #     auth:
+    #       username: montransit
+    #       password: $MT_DOCKER_PASSWORD
+    executor:
+      name: android/android-machine
+      tag: default
+      # https://circleci.com/docs/configuration-reference/#linuxvm-execution-environment
+      # resource-class: medium # small, medium (default), medium+, large, xlarge
+      # resource-class: medium # (vCPU: 2 | RAM: 4GB) (DEFAULT)
+      resource-class: medium # (vCPU: 2 | RAM: 7.5GB)
+      # resource-class: large # (vCPU: 4 | RAM: 8GB) (large is maxiumum for free plan)
     environment: # https://circleci.com/docs/2.0/java-oom/ (-XX:MaxRAMPercentage=90.0 )
       JAVA_TOOL_OPTIONS: -Xmx5432m
       JVM_OPTS: -Xmx5432m
@@ -39,6 +44,8 @@ jobs:
             sudo apt-get update
             sudo apt-get -y install gawk
       - android/accept-licenses
+      - android/change-java-version:
+          java-version: 17
       - run:
           name: Update SDK
           command: echo y | sdkmanager "build-tools;34.0.0" "platform-tools" "platforms;android-34"
