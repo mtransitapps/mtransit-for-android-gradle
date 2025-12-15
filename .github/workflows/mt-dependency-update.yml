@@ -34,7 +34,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: exit 1000
       - name: MT check out main repository code (no submodules)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: mmathieum
           submodules: true # required to set right token
@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "MT_GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: MT add parser repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: mmathieum
           repository: mtransitapps/parser
@@ -65,7 +65,7 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
       - name: MT cache > Gradle wrapper
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/wrapper
@@ -75,7 +75,7 @@ jobs:
       - name: MT Gradle cache > Generate key
         run: ./init_cache_key.sh
       - name: MT cache > Gradle cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -108,14 +108,14 @@ jobs:
           MT_ENCRYPT_KEY: ${{ secrets.MT_ENCRYPT_KEY }}
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > dependency update XML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: dependency-update-xml-results
           path: |
             build/dependencyUpdates/report.xml
       - if: ${{ env.MT_DEPENDENCY_UPDATE_AVAILABLE == 'true' && always() }} # even if tests fails
         name: MT artifact > dependency update HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: html-dependency-update-reports
           path: |
